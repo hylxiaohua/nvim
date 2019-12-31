@@ -128,8 +128,8 @@ noremap <LEADER>st :Startify<CR>
 noremap l u
 
 " Insert Key
-noremap k i
-noremap K I
+" noremap k i
+" noremap K I
 
 " make Y to copy till the end of the line
 nnoremap Y y$
@@ -168,26 +168,26 @@ noremap <c-g> :term lazygit<CR>
 " < n   i >
 "     e
 "     v
-noremap <silent> u k
-noremap <silent> n h
-noremap <silent> e j
-noremap <silent> i l
+"noremap <silent> u k
+"noremap <silent> n h
+"noremap <silent> e j
+"noremap <silent> i l
 
 " U/E keys for 5 times u/e (faster navigation)
 noremap <silent> U 5k
 noremap <silent> E 5j
 
 " N key: go to the start of the line
-noremap <silent> N 0
+" noremap <silent> N 0
 " I key: go to the end of the line
-noremap <silent> I $
+" noremap <silent> I $
 
 " Faster in-line navigation
 noremap W 5w
 noremap B 5b
 
 " set h (same as n, cursor left) to 'end of word'
-noremap h e
+" noremap h e
 
 " Ctrl + U or E will move up/down the view port without moving the cursor
 noremap <C-U> 5<C-y>
@@ -203,11 +203,11 @@ inoremap <C-a> <ESC>A
 " === Window management
 " ===
 " Use <space> + new arrow keys for moving the cursor around windows
-noremap <LEADER>w <C-w>w
-noremap <LEADER>u <C-w>k
-noremap <LEADER>e <C-w>j
-noremap <LEADER>n <C-w>h
-noremap <LEADER>i <C-w>l
+" noremap <LEADER>w <C-w>w
+noremap <LEADER>k <C-w>k
+noremap <LEADER>j <C-w>j
+noremap <LEADER>h <C-w>h
+noremap <LEADER>l <C-w>l
 
 " Disable the default s key
 noremap s <nop>
