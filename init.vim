@@ -39,6 +39,7 @@ set autochdir
 set number
 set relativenumber
 set cursorline
+set cursorcolumn
 set noexpandtab
 set tabstop=2
 set shiftwidth=2
@@ -80,6 +81,9 @@ endif
 set colorcolumn=80
 set updatetime=1000
 
+" F4 换行开关
+nnoremap <F4> :set wrap! wrap?<CR>
+
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
@@ -111,8 +115,8 @@ let g:terminal_color_14 = '#9AEDFE'
 " === Basic Mappings
 " ===
 " Set <LEADER> as <SPACE>, ; as :
-let mapleader=" "
-noremap ; :
+let mapleader=","
+" noremap ; :
 
 " Save & quit
 noremap Q :q<CR>
@@ -125,7 +129,7 @@ noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 noremap <LEADER>st :Startify<CR>
 
 " Undo operations
-noremap l u
+" noremap l u
 
 " Insert Key
 " noremap k i
@@ -183,8 +187,8 @@ noremap <silent> E 5j
 " noremap <silent> I $
 
 " Faster in-line navigation
-noremap W 5w
-noremap B 5b
+" noremap W 5w
+" noremap B 5b
 
 " set h (same as n, cursor left) to 'end of word'
 " noremap h e
@@ -266,7 +270,7 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 nnoremap \p 1<C-G>
 
 " Move the next character to the end of the line with ctrl+9
-inoremap <C-u> <ESC>lx$p
+" inoremap <C-u> <ESC>lx$p
 
 " Opening a terminal window
 noremap <LEADER>/ :term<CR>
@@ -278,7 +282,7 @@ noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 noremap <LEADER>sc :set spell!<CR>
 
 " Press ` to change case (instead of ~)
-noremap ` ~
+" noremap ` ~
 
 noremap <C-c> zz
 
@@ -295,7 +299,7 @@ noremap <LEADER>= :lne<CR>
 noremap \s :%s//g<left><left>
 
 " Compile function
-noremap r :call CompileRunGcc()<CR>
+noremap rr :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 	exec "w"
 	if &filetype == 'c'
@@ -359,9 +363,8 @@ Plug 'ajmwagar/vim-deus'
 Plug 'jaxbot/semantic-highlight.vim'
 Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
 
-" File navigation
-"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-"Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf.vim'
 "Plug 'yuki-ycino/fzf-preview.vim'
 "Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
@@ -436,7 +439,10 @@ Plug 'junegunn/vim-after-object' " da= to delete what's after =
 Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph, 
 Plug 'tpope/vim-capslock'	" Ctrl+L (insert) to toggle capslock
 Plug 'easymotion/vim-easymotion'
+Plug 'unblevable/quick-scope' " quickscope 更高效的行内移动, f/F/t/T, 才触发
+
 Plug 'Konfekt/FastFold'
+Plug 'bronson/vim-trailing-whitespace'
 
 " Input Method Autoswitch
 Plug 'rlue/vim-barbaric'
@@ -526,39 +532,39 @@ hi NonText ctermfg=gray guifg=grey10
 let g:airline_powerline_fonts = 0
 
 
-"" ===
-"" === NERDTree
-"" ===
-"noremap tt :NERDTreeToggle<CR>
-"let NERDTreeMapOpenExpl = ""
-"let NERDTreeMapUpdir = "N"
-"let NERDTreeMapUpdirKeepOpen = "n"
-"let NERDTreeMapOpenSplit = ""
-"let NERDTreeMapOpenVSplit = "I"
-"let NERDTreeMapActivateNode = "i"
-"let NERDTreeMapOpenInTab = "o"
-"let NERDTreeMapOpenInTabSilent = "O"
-"let NERDTreeMapPreview = ""
-"let NERDTreeMapCloseDir = ""
-"let NERDTreeMapChangeRoot = "l"
-"let NERDTreeMapMenu = ","
-"let NERDTreeMapToggleHidden = "zh"
+" ===
+" === NERDTree
+" ===
+noremap <leader>n :NERDTreeToggle<CR>
+let NERDTreeMapOpenExpl = ""
+let NERDTreeMapUpdir = "N"
+let NERDTreeMapUpdirKeepOpen = "n"
+let NERDTreeMapOpenSplit = "s"
+let NERDTreeMapOpenVSplit = "v"
+let NERDTreeMapActivateNode = "i"
+let NERDTreeMapOpenInTab = "t"
+let NERDTreeMapOpenInTabSilent = "O"
+let NERDTreeMapPreview = ""
+let NERDTreeMapCloseDir = ""
+let NERDTreeMapChangeRoot = "l"
+let NERDTreeMapMenu = ","
+let NERDTreeMapToggleHidden = "zh"
 
 
-"" ==
-"" == NERDTree-git
-"" ==
-"let g:NERDTreeIndicatorMapCustom = {
-			"\ "Modified"	: "✹",
-			"\ "Staged"		: "✚",
-			"\ "Untracked" : "✭",
-			"\ "Renamed"	 : "➜",
-			"\ "Unmerged"	: "═",
-			"\ "Deleted"	 : "✖",
-			"\ "Dirty"		 : "✗",
-			"\ "Clean"		 : "✔︎",
-			"\ "Unknown"	 : "?"
-			"\ }
+" ==
+" == NERDTree-git
+" ==
+let g:NERDTreeIndicatorMapCustom = {
+			\ "Modified"	: "✹",
+			\ "Staged"		: "✚",
+			\ "Untracked" : "✭",
+			\ "Renamed"	 : "➜",
+			\ "Unmerged"	: "═",
+			\ "Deleted"	 : "✖",
+			\ "Dirty"		 : "✗",
+			\ "Clean"		 : "✔︎",
+			\ "Unknown"	 : "?"
+			\ }
 
 
 " ==
@@ -710,7 +716,10 @@ command! -bang BTags
   \                     tail -n +\$(echo {3} | tr -d \";\\\"\") {2} |
   \                     head -n 16"'
   \ })
-
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
 "" ===
 "" === fzf-preview.vim
@@ -1010,17 +1019,30 @@ let g:colorizer_syntax = 1
 
 " ===
 " === vim-easymotion
+" === hyl
+" easymotion {{{
+    let g:EasyMotion_smartcase = 1
+    "let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+    map <Leader><leader>h <Plug>(easymotion-linebackward)
+    map <Leader><Leader>j <Plug>(easymotion-j)
+    map <Leader><Leader>k <Plug>(easymotion-k)
+    map <Leader><leader>l <Plug>(easymotion-lineforward)
+    " 重复上一次操作, 类似repeat插件, 很强大
+    map <Leader><leader>. <Plug>(easymotion-repeat)
+" }}}
+
 " ===
-let g:EasyMotion_do_shade = 0
-let g:EasyMotion_smartcase = 1
-"map f <Plug>(easymotion-bd-f)
-"nmap f <Plug>(easymotion-overwin-f)
-"map \; <Plug>(easymotion-prefix)
-nmap ' <Plug>(easymotion-overwin-f2)
-"map 'l <Plug>(easymotion-bd-jk)
-"nmap 'l <Plug>(easymotion-overwin-line)
-"map  'w <Plug>(easymotion-bd-w)
-"nmap 'w <Plug>(easymotion-overwin-w)
+" === quickscope
+" === hyl
+" quickscope {{{
+    "let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+    let g:qs_highlight_on_keys = ['f', 'F', 't']
+    " macvim/gvim会有问题, 暂时注解
+    " let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
+    " let g:qs_first_occurrence_highlight_color = 155       " terminal vim
+    " let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
+    " let g:qs_second_occurrence_highlight_color = 81         " terminal vim
+" }}}
 
 " ===
 " === goyo
@@ -1067,6 +1089,13 @@ nnoremap <c-q> :Quickfix!<CR>
 " ===
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
+" ===
+" === trailingwhitespace
+" ===
+"trailingwhitespace {{{
+    map <leader><space> :FixWhitespace<cr>
+"}}}
 
 
 " ===
