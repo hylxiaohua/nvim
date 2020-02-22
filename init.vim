@@ -28,7 +28,7 @@ endif
 " ===
 " === System
 " ===
-"set clipboard=unnamedplus
+" set clipboard=unnamedplus
 let &t_ut=''
 set autochdir
 
@@ -197,6 +197,10 @@ noremap <silent> E 5j
 noremap <C-U> 5<C-y>
 noremap <C-E> 5<C-e>
 
+" move with abc_def_gh
+noremap <C-w> f_l
+noremap <C-b> F_;l
+
 " ===
 " === Insert Mode Cursor Movement
 " ===
@@ -247,11 +251,11 @@ noremap <LEADER>q <C-w>j:q<CR>
 " Create a new tab with tu
 noremap tu :tabe<CR>
 " Move around tabs with tn and ti
-noremap tn :-tabnext<CR>
-noremap ti :+tabnext<CR>
+noremap tp :-tabnext<CR>
+noremap tn :+tabnext<CR>
 " Move the tabs with tmn and tmi
-noremap tmn :-tabmove<CR>
-noremap tmi :+tabmove<CR>
+noremap tmp :-tabmove<CR>
+noremap tmn :+tabmove<CR>
 
 
 " ===
@@ -423,7 +427,8 @@ Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-p
 Plug 'tweekmonster/braceless.vim'
 
 " Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+"Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 Plug 'theniceboy/bullets.vim'
 
@@ -585,7 +590,10 @@ nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 " ===
 " fix the most annoying bug that coc has
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint']
+"let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-snippets']
+"let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint']
+let g:coc_global_extensions = ['coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint']
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -634,7 +642,7 @@ let g:mkdp_refresh_slow = 0
 let g:mkdp_command_for_global = 0
 let g:mkdp_open_to_the_world = 0
 let g:mkdp_open_ip = ''
-let g:mkdp_echo_preview_url = 0
+let g:mkdp_echo_preview_url = 1
 let g:mkdp_browserfunc = ''
 let g:mkdp_preview_options = {
 			\ 'mkit': {},
@@ -674,7 +682,7 @@ noremap <C-f> :Ag<CR>
 noremap <C-h> :MRU<CR>
 noremap <C-t> :BTags<CR>
 noremap <C-l> :LinesWithPreview<CR>
-noremap <C-w> :Buffers<CR>
+"noremap <C-w> :Buffers<CR>
 noremap q; :History:<CR>
 
 autocmd! FileType fzf
@@ -869,7 +877,7 @@ inoremap <c-n> <nop>
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-e>"
 let g:UltiSnipsJumpBackwardTrigger="<c-n>"
-let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', 'UltiSnips']
+let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/UltiSnips/', 'UltiSnips']
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
 
 
