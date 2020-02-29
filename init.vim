@@ -345,14 +345,11 @@ endfunc
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'makerj/vim-pdf'
-Plug 'theniceboy/vim-leader-mapper'
-Plug 'junegunn/vim-peekaboo'
-
 " Testing my own plugin
 Plug 'theniceboy/vim-calc'
 
 " Pretty Dress
+" 状态栏
 Plug 'theniceboy/eleline.vim'
 Plug 'bling/vim-bufferline'
 "Plug 'liuchengxu/space-vim-theme'
@@ -361,10 +358,12 @@ Plug 'bling/vim-bufferline'
 "Plug 'rakr/vim-one'
 "Plug 'mhartington/oceanic-next'
 "Plug 'kristijanhusak/vim-hybrid-material'
+"一种colortheme
 Plug 'ajmwagar/vim-deus'
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
+"说是可以给不同的变量高亮成不同颜色，但试了没啥用。
 Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -373,13 +372,14 @@ Plug 'junegunn/fzf.vim'
 "Plug 'yuki-ycino/fzf-preview.vim'
 "Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 "Plug 'junegunn/fzf'
-Plug 'francoiscabrol/ranger.vim'
+Plug 'francoiscabrol/ranger.vim' "按 R 触发
 
 " Taglist
-Plug 'liuchengxu/vista.vim'
+Plug 'liuchengxu/vista.vim'   "按 T 触发
 
 " Error checking
 Plug 'dense-analysis/ale'
+" 可以根据语法错误找到一些fix方案，但我不知道怎么生效
 Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
 
 " Auto Complete
@@ -390,18 +390,23 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Undo Tree
+" 临时恢复文件，救命用的
 Plug 'mbbill/undotree'
 
 " Git
+" This plugin provides syntax highlighting and up-to-date code snippets for .gitignore file.
 Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
+" 不清楚有啥用
 Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 "Plug 'mhinz/vim-signify'
+" 一种git diff的preview插件，功能还需摸索中，<leader, gf>触发，显示当前页的diff
 Plug 'airblade/vim-gitgutter'
 
 " Tex
 Plug 'lervag/vimtex'
 
 " CSharp
+" OmniSharp-vim is a plugin for Vim to provide IDE like abilities for C#.
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'ctrlpvim/ctrlp.vim' , { 'for': ['cs', 'vim-plug'] } " omnisharp-vim dependency
 
@@ -419,52 +424,72 @@ Plug 'jaxbot/browserlink.vim'
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 
 " Python
+" 折叠代码用的，好像只是提供了折叠import，和注释的功能，但尝试了一下，没效果
 Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
+" 高亮
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
 "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 "Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
+" Text objects, folding, and more for Python and other indented languages
 Plug 'tweekmonster/braceless.vim'
 
 " Markdown
 "Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
+" 管理bullet lists(项目符号列表)，不知道怎么用。
 Plug 'theniceboy/bullets.vim'
 
 " Editor Enhancement
 "Plug 'Raimondi/delimitMate'
+" 表示没看懂
 Plug 'cohama/lexima.vim'
+" 选中同一个单词，多光标同时修改 <c-k>触发
 Plug 'terryma/vim-multiple-cursors'
+" <leader-cn/cc>注释 cu反注释 ca切换注释样式
 Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
+" 没看懂，感觉把一段文本映射成另一段
 Plug 'AndrewRadev/switch.vim' " gs to switch
+" 添加 '' 改变‘’
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
+" 快速选中，还没摸索出实际用处
 Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
+" da= to delete what's after =
 Plug 'junegunn/vim-after-object' " da= to delete what's after =
-Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph, 
+Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph,
+" 锁定大小写的，没啥用
 Plug 'tpope/vim-capslock'	" Ctrl+L (insert) to toggle capslock
 Plug 'easymotion/vim-easymotion'
 Plug 'unblevable/quick-scope' " quickscope 更高效的行内移动, f/F/t/T, 才触发
-
+" 还没摸索出怎么用
 Plug 'Konfekt/FastFold'
+" 去除行尾空格
 Plug 'bronson/vim-trailing-whitespace'
+" 显示寄存器的值 "触发
+Plug 'junegunn/vim-peekaboo'
 
-" Input Method Autoswitch
+" Input Method Autoswitch, 还未摸索，看gif挺有用的
 Plug 'rlue/vim-barbaric'
 
 " Formatter
+" 按\f触发，试了下c++下，完全是垃圾
 Plug 'Chiel92/vim-autoformat'
 
 " For general writing
+" 一种全体居中，适合阅读的一种模式，有点像word的两端对齐
 Plug 'junegunn/goyo.vim'
 "Plug 'reedes/vim-wordy'
 "Plug 'ron89/thesaurus_query.vim'
 
 " Bookmarks
+" 打标记用的
 Plug 'kshenoy/vim-signature'
 
 " Find & Replace
+" 多个文件之间的替换和查找
 Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
+" 目测是查找时 显示 x/y的
 Plug 'osyo-manga/vim-anzu'
 
 " Documentation
@@ -474,16 +499,26 @@ Plug 'osyo-manga/vim-anzu'
 "Plug 'voldikss/vim-floaterm'
 "Plug 'liuchengxu/vim-clap'
 "Plug 'jceb/vim-orgmode'
+"就是输入 vim后进来的那个界面
 Plug 'mhinz/vim-startify'
+" 可以自由的让leader键和其他键位绑定，比如leader + f = fzf
+Plug 'theniceboy/vim-leader-mapper'
 
 " Vim Applications
+" 一个日历加备忘录
 Plug 'itchyny/calendar.vim'
 
 " Other visual enhancement
+" 给一些Needtree之类的加一些图标
 Plug 'ryanoasis/vim-devicons'
+" 让不同层次的括号显示不同颜色， :rainbowtoggle触发
+Plug 'luochen1990/rainbow'
 
 " Other useful utilities
+" 能够在命令行模式输入一些 mkdir这些shell命令
 Plug 'tpope/vim-eunuch' " do stuff like :SudoWrite
+" pdf阅读，体验很差，公式完全没有
+Plug 'makerj/vim-pdf'
 
 " Dependencies
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -716,10 +751,10 @@ command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview())
 command! -bang BTags
   \ call fzf#vim#buffer_tags('', {
   \     'down': '40%',
-  \     'options': '--with-nth 1 
-  \                 --reverse 
-  \                 --prompt "> " 
-  \                 --preview-window="70%" 
+  \     'options': '--with-nth 1
+  \                 --reverse
+  \                 --prompt "> "
+  \                 --preview-window="70%"
   \                 --preview "
   \                     tail -n +\$(echo {3} | tr -d \";\\\"\") {2} |
   \                     head -n 16"'
@@ -1138,6 +1173,10 @@ let g:leaderMenu = {'name':  "Shortcut Menu",
 nnoremap <silent> ? :call leaderMapper#start() "<Space>"<CR>
 let g:leaderMapperWidth = 80
 
+" ===
+" === rainbow
+" ===
+let g:rainbow_active = 1
 
 " ===================== End of Plugin Settings =====================
 
