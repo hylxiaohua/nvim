@@ -100,8 +100,6 @@ Please **DO NOT** just copy this configuration folder without really looking at 
 ## Keyboard Shortcuts
 ### 1 Basic Editor Features
 #### 1.1 The Most Basics
-**`k`** : switchs to **`INSERT`** : mode (same as key `i` in vanilla vim)
-
 **`Q`** : quits current vim window (same as command `:q` in vanilla vim)
 
 **`S`** : saves the current file (same as command `:w` in vanilla vim)
@@ -113,30 +111,21 @@ Please **DO NOT** just copy this configuration folder without really looking at 
 #### 1.2 Remapped Cursor Movement
 | Shortcut   | Action                                                    | Equivalent |
 |------------|-----------------------------------------------------------|------------|
-| `u`        | Cursor up a terminal line                                 | `k`        |
-| `e`        | Cursor down a terminal line                               | `j`        |
-| `n`        | Cursor left                                               | `h`        |
-| `i`        | Cursor right                                              | `l`        |
-| `U`        | Cursor up 5 terminal lines                                | `5k`       |
-| `E`        | Cursor down 5 terminal lines                              | `5j`       |
-| `N`        | Cursor to the start of the line                           | `0`        |
-| `I`        | Cursor to the end of the line                             | `$`        |
-| `Ctrl` `u` | Move the view port up 5 lines without moving the cursor   | `Ctrl` `y` |
+| `J`        | Cursor up 5 terminal lines                                | `5k`       |
+| `K`        | Cursor down 5 terminal lines                              | `5j`       |
+| `H`        | Cursor to the start of the line                           | `0`        |
+| `L`        | Cursor to the end of the line                             | `$`        |
+ `Ctrl` `y` | Move the view port up 5 lines without moving the cursor   | `Ctrl` `y` |
 | `Ctrl` `e` | Move the view port down 5 lines without moving the cursor | `Ctrl` `e` |
-| `h`        | Move to the end of this word                              | `e`        |
-| `W`        | Move cursor five words forward                            | `5w`       |
-| `B`        | Move cursor five words forward                            | `5b`       |
 
 #### 1.3 Remapped Insert Mode Keys
 | Shortcut   | Action                                                               |
 |------------|----------------------------------------------------------------------|
 | `Ctrl` `a` | Move cursor to the end of the line                                   |
-| `Ctrl` `u` | Move the character on the right of the cursor to the end of the line |
 
 #### 1.4 Remapped Text Manipulating Commands in Normal Mode
 | Shortcut        | Action                                |
 |-----------------|---------------------------------------|
-| `l`             | **undo**                              |
 | `<`             | Un-indent                             |
 | `>`             | Indent                                |
 | `SPACE` `SPACE` | Goto the next placeholder (`<++>`)    |
@@ -148,9 +137,9 @@ Please **DO NOT** just copy this configuration folder without really looking at 
 | `SPACE` `s` `c` | Toggle spell suggestion a                      |
 | `SPACE` `d` `w` | Find adjacent duplicated word                  |
 | `SPACE` `t` `t` | Convert every 4 Spaces to a tab                |
-| `SPACE` `o`     | Fold                                           |
-| `SPACE` `-`     | Previous quick-fix position                    |
-| `SPACE` `+`     | Next quick-fix position                        |
+| `leader` `o`     | Fold                                           |
+| `leader` `-`     | Previous quick-fix position                    |
+| `leader` `+`     | Next quick-fix position                        |
 | `\` `p`         | Show the path of the current file              |
 | `SPACE` `/`     | Create a new terminal below the current window |
 
@@ -164,10 +153,10 @@ Please **DO NOT** just copy this configuration folder without really looking at 
 #### 2.1 Creating Window Through Split Screen
 | Shortcut    | Action                                                                      |
 |-------------|-----------------------------------------------------------------------------|
-| `s` `u`     | Create a new horizontal split screen and place it above the current window  |
-| `s` `e`     | Create a new horizontal split screen and place it below the current window  |
-| `s` `n`     | Create a new vertical split screen and place it left to the current window  |
-| `s` `i`     | Create a new vertical split screen and place it right to the current window |
+| `s` `h`     | Create a new horizontal split screen and place it above the current window  |
+| `s` `j`     | Create a new horizontal split screen and place it below the current window  |
+| `s` `k`     | Create a new vertical split screen and place it left to the current window  |
+| `s` `l`     | Create a new vertical split screen and place it right to the current window |
 | `s` `v`     | Set the two splits to be vertical                                           |
 | `s` `h`     | Set the two splits to be horizontal                                         |
 | `s` `r` `v` | Rotate splits and arrange splits vertically                                 |
@@ -176,11 +165,10 @@ Please **DO NOT** just copy this configuration folder without really looking at 
 #### 2.2 Moving the Cursor Between Different Windows
 | Shortcut      | Action                         |
 |---------------|--------------------------------|
-| `SPACE` + `w` | Move cursor to the next window |
-| `SPACE` + `n` | Move cursor one window left    |
-| `SPACE` + `i` | Move cursor one window right   |
-| `SPACE` + `u` | Move cursor one window up      |
-| `SPACE` + `e` | Move cursor one window down    |
+| `leader` + `h` | Move cursor one window left    |
+| `leader` + `l` | Move cursor one window right   |
+| `leader` + `k` | Move cursor one window up      |
+| `leader` + `j` | Move cursor one window down    |
 
 #### 2.3 Resizing Different Windows
 Use the arrow keys to resize the current window.
@@ -194,16 +182,17 @@ Use the arrow keys to resize the current window.
 ### 3 Tab Management
 | Shortcut    | Action           |
 |-------------|------------------|
-| `t` `u`     | Create a new tab |
-| `t` `n`     | Go one tab left  |
-| `t` `i`     | Go One tab right |
-| `t` `m` `n` | Move tab left    |
-| `t` `m` `i` | Move tab right   |
+| `t` `n`     | Create a new tab |
+| `t` `h`     | Go one tab left  |
+| `t` `l`     | Go One tab right |
+| `t` `m` `h` | Move tab left    |
+| `t` `m` `l` | Move tab right   |
 
 ### 4 Terminal Keyboard Shortcuts
 | Shortcut    | Action                                                      |
 |-------------|-------------------------------------------------------------|
 | `Ctrl` `n`  | Escape from terminal input mode                             |
+| `Ctrl` `o`  | Escape from terminal input mode                             and quit|
 
 ## Plugins Keybindings (Screenshots/GIF provided!)
 ### AutoCompletion
@@ -220,11 +209,11 @@ Use the arrow keys to resize the current window.
 <img alt="Gif" src="https://user-images.githubusercontent.com/251450/55285193-400a9000-53b9-11e9-8cff-ffe4983c5947.gif" width="60%" />
 
 #### Ultisnips
-| Shortcut   | Action                                           |
-|------------|--------------------------------------------------|
-| `Ctrl` `e` | Expand a snippet                                 |
-| `Ctrl` `n` | (in snippet) Previous Cursor position in snippet |
-| `Ctrl` `e` | (in snippet) Next Cursor position in snippet     |
+| Shortcut   | Action                                           | Extra                      |
+|------------|--------------------------------------------------|----------------------------|
+| `Ctrl` `e` | Expand a snippet                                 | conflict with coc-snippets |
+| `Ctrl` `n` | (in snippet) Previous Cursor position in snippet |                            |
+| `Ctrl` `e` | (in snippet) Next Cursor position in snippet     |                            |
 
 ![GIF Demo](https://raw.github.com/SirVer/ultisnips/master/doc/demo.gif)
 
@@ -300,9 +289,11 @@ See `:help table-mode.txt` for more.
 #### Undotree
 | Shortcut      | Action        |
 |---------------|---------------|
-| `Shift` + `L` | Open Undotree |
-| `u`           | Newer Version |
-| `e`           | Older Version |
+| `Leader` + `L` | Open Undotree |
+| `j`           | Newer Version |
+| `J`           | Newer Version |
+| `k`           | Older Version |
+| `K`           | Older Version |
 
 <img alt="Png" src="https://camo.githubusercontent.com/56430626a5444ea2f0249d71f9288775277c7f5d/68747470733a2f2f73697465732e676f6f676c652e636f6d2f736974652f6d6262696c6c2f756e646f747265655f6e65772e706e67" width="60%" />
 

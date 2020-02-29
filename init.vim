@@ -245,13 +245,13 @@ noremap <c-d> :tab sp<CR>:term python3 -m pudb %<CR>
 "noremap <silent> i l
 
 " U/E keys for 5 times u/e (faster navigation)
-noremap <silent> U 5k
-noremap <silent> E 5j
+noremap <silent> K 5k
+noremap <silent> J 5j
 
-" N key: go to the start of the line
-" noremap <silent> N 0
-" I key: go to the end of the line
-" noremap <silent> I $
+" H key: go to the start of the line
+noremap <silent> H 0
+" L key: go to the end of the line
+noremap <silent> L $
 
 " Faster in-line navigation
 " noremap W 5w
@@ -261,8 +261,8 @@ noremap <silent> E 5j
 " noremap h e
 
 " Ctrl + U or E will move up/down the view port without moving the cursor
-noremap <C-U> 5<C-y>
-noremap <C-E> 5<C-e>
+"noremap <C-U> 5<C-y>
+"noremap <C-E> 5<C-e>
 
 " move with abc_def_gh
 noremap <C-w> f_l
@@ -301,10 +301,10 @@ noremap <LEADER>l <C-w>l
 noremap s <nop>
 
 " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
-noremap su :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
-noremap se :set splitbelow<CR>:split<CR>
-noremap sn :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
-noremap si :set splitright<CR>:vsplit<CR>
+noremap sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+noremap sj :set splitbelow<CR>:split<CR>
+noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+noremap sl :set splitright<CR>:vsplit<CR>
 
 " Resize splits with arrow keys
 noremap <up> :res +5<CR>
@@ -329,13 +329,13 @@ noremap <LEADER>q <C-w>j:q<CR>
 " === Tab management
 " ===
 " Create a new tab with tu
-noremap tu :tabe<CR>
+noremap tn :tabe<CR>
 " Move around tabs with tn and ti
-noremap tp :-tabnext<CR>
-noremap tn :+tabnext<CR>
+noremap th :-tabnext<CR>
+noremap tl :+tabnext<CR>
 " Move the tabs with tmn and tmi
-noremap tmp :-tabmove<CR>
-noremap tmn :+tabmove<CR>
+noremap tmh :-tabmove<CR>
+noremap tml :+tabmove<CR>
 
 
 " ===
@@ -357,7 +357,7 @@ nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
 " inoremap <C-u> <ESC>lx$p
 
 " Opening a terminal window
-noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
+noremap <space>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
 noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
@@ -426,8 +426,9 @@ endfunc
 " ===
 
 call plug#begin('~/.config/nvim/plugged')
-
-Plug 'tiagofumo/dart-vim-flutter-layout'
+" dark是一种语言，flutter是框架
+"Plug 'tiagofumo/dart-vim-flutter-layout'
+" 说是可以高亮当前光标下的变量，但好像没效果
 Plug 'RRethy/vim-illuminate'
 
 " Testing my own plugin
@@ -452,12 +453,12 @@ Plug 'jaxbot/semantic-highlight.vim'
 "说是可以给不同的变量高亮成不同颜色，但试了没啥用。
 Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
 
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" File navigation
 Plug 'junegunn/fzf.vim'
 "Plug 'yuki-ycino/fzf-preview.vim'
 "Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 "Plug 'junegunn/fzf'
+" ranger浮动窗口
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
 " Taglist
@@ -485,10 +486,9 @@ Plug 'mbbill/undotree'
 " Git
 " This plugin provides syntax highlighting and up-to-date code snippets for .gitignore file.
 Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
-" 不清楚有啥用
 Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 "Plug 'mhinz/vim-signify'
-" 一种git diff的preview插件，功能还需摸索中，<leader, gf>触发，显示当前页的diff
+" 一种git diff的preview插件
 Plug 'airblade/vim-gitgutter'
 
 " Tex
@@ -524,8 +524,8 @@ Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-p
 Plug 'tweekmonster/braceless.vim'
 
 " Flutter
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'thosakwe/vim-flutter'
+"Plug 'dart-lang/dart-vim-plugin'
+"Plug 'thosakwe/vim-flutter'
 
 " Swift
 Plug 'keith/swift.vim'
@@ -534,8 +534,9 @@ Plug 'keith/swift.vim'
 "Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
-" 管理bullet lists(项目符号列表)，不知道怎么用。
+"根据markdown的标题，生成目录用的
 Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown'] }
+" 管理bullet lists(项目符号列表)，不知道怎么用。
 Plug 'theniceboy/bullets.vim'
 
 " Other filetypes
@@ -545,7 +546,7 @@ Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
 "Plug 'Raimondi/delimitMate'
 " 处理 pairs""的插件
 Plug 'jiangmiao/auto-pairs'
-" 选中同一个单词，多光标同时修改 <c-k>触发
+" 选中同一个单词，多光标同时修改 <c-k>触发,暂时还不知道怎么取消，回到上一个
 Plug 'mg979/vim-visual-multi'
 " <leader-cn/cc>注释 cu反注释 ca切换注释样式
 Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
@@ -568,8 +569,8 @@ Plug 'Konfekt/FastFold'
 Plug 'bronson/vim-trailing-whitespace'
 " 显示寄存器的值 "触发
 Plug 'junegunn/vim-peekaboo'
-
 "Plug 'wellle/context.vim'
+"一种批量的替换工具
 Plug 'svermeulen/vim-subversive'
 
 " Input Method Autoswitch
@@ -603,10 +604,7 @@ Plug 'osyo-manga/vim-anzu'
 "Plug 'voldikss/vim-floaterm'
 "Plug 'liuchengxu/vim-clap'
 "Plug 'jceb/vim-orgmode'
-"就是输入 vim后进来的那个界面
-Plug 'mhinz/vim-startify'
-" 可以自由的让leader键和其他键位绑定，比如leader + f = fzf
-Plug 'theniceboy/vim-leader-mapper'
+"Plug 'mhinz/vim-startify'
 
 " Vim Applications
 " 一个日历加备忘录
@@ -617,10 +615,13 @@ Plug 'itchyny/calendar.vim'
 Plug 'ryanoasis/vim-devicons'
 " 让不同层次的括号显示不同颜色， :rainbowtoggle触发
 Plug 'luochen1990/rainbow'
+" 一种buffer/tab/的显示工具，在最上角，方便切换。
 Plug 'mg979/vim-xtabline'
+" erminus enhances Vim's and Neovim's integration with the terminal in four ways
 Plug 'wincent/terminus'
 
 " Other useful utilities
+" 忘记加sudo了可以用
 Plug 'lambdalisue/suda.vim' " do stuff like :sudowrite
 " pdf阅读，体验很差，公式完全没有
 Plug 'makerj/vim-pdf'
@@ -663,42 +664,7 @@ hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
 
 " ===================== Start of Plugin Settings =====================
-
-
 " ===
-" === NERDTree
-" ===
-noremap <leader>n :NERDTreeToggle<CR>
-let NERDTreeMapOpenExpl = ""
-let NERDTreeMapUpdir = "N"
-let NERDTreeMapUpdirKeepOpen = "n"
-let NERDTreeMapOpenSplit = "s"
-let NERDTreeMapOpenVSplit = "v"
-let NERDTreeMapActivateNode = "i"
-let NERDTreeMapOpenInTab = "t"
-let NERDTreeMapOpenInTabSilent = "O"
-let NERDTreeMapPreview = ""
-let NERDTreeMapCloseDir = ""
-let NERDTreeMapChangeRoot = "l"
-let NERDTreeMapMenu = ","
-let NERDTreeMapToggleHidden = "zh"
-
-
-" ==
-" == NERDTree-git
-" ==
-let g:NERDTreeIndicatorMapCustom = {
-			\ "Modified"	: "✹",
-			\ "Staged"		: "✚",
-			\ "Untracked" : "✭",
-			\ "Renamed"	 : "➜",
-			\ "Unmerged"	: "═",
-			\ "Deleted"	 : "✖",
-			\ "Dirty"		 : "✗",
-			\ "Clean"		 : "✔︎",
-			\ "Unknown"	 : "?"
-			\ }
-
 " === eleline.vim
 " ===
 let g:airline_powerline_fonts = 0
@@ -715,7 +681,7 @@ autocmd BufWritePost * GitGutter
 nnoremap <LEADER>gf :GitGutterFold<CR>
 nnoremap H :GitGutterPreviewHunk<CR>
 nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
-nnoremap <LEADER>g= :GitGutterNextHunk<CR>
+nnoremap <LEADER>g+ :GitGutterNextHunk<CR>
 
 
 " ===
@@ -902,7 +868,7 @@ let g:bookmark_location_list = 1
 " ===
 " === Undotree
 " ===
-noremap L :UndotreeToggle<CR>
+noremap <Leader>L :UndotreeToggle<CR>
 let g:undotree_DiffAutoOpen = 1
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_ShortIndicators = 1
@@ -910,10 +876,10 @@ let g:undotree_WindowLayout = 2
 let g:undotree_DiffpanelHeight = 8
 let g:undotree_SplitWidth = 24
 function g:Undotree_CustomMap()
-	nmap <buffer> u <plug>UndotreeNextState
-	nmap <buffer> e <plug>UndotreePreviousState
-	nmap <buffer> U 5<plug>UndotreeNextState
-	nmap <buffer> E 5<plug>UndotreePreviousState
+	nmap <buffer> j <plug>UndotreeNextState
+	nmap <buffer> k <plug>UndotreePreviousState
+	nmap <buffer> J 5<plug>UndotreeNextState
+	nmap <buffer> K 5<plug>UndotreePreviousState
 endfunc
 
 
@@ -1060,8 +1026,8 @@ augroup END
 " === Anzu
 " ===
 set statusline=%{anzu#search_status()}
-nnoremap = n
-nnoremap - N
+"nnoremap = n
+"nnoremap - N
 
 
 " ===
@@ -1313,7 +1279,7 @@ let g:vmt_fence_closing_text = '/TOC'
 let g:rnvimr_ex_enable = 1
 let g:rnvimr_pick_enable = 1
 nnoremap <silent> R :RnvimrSync<CR>:RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
-let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
+let g:rnvimr_presets = [{'width': 0.7, 'height': 0.7}]
 
 
 " ===
