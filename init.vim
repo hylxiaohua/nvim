@@ -443,8 +443,8 @@ Plug 'theniceboy/bullets.vim'
 
 " Editor Enhancement
 "Plug 'Raimondi/delimitMate'
-" 表示没看懂
-Plug 'cohama/lexima.vim'
+" 处理 pairs""的插件
+Plug 'jiangmiao/auto-pairs'
 " 选中同一个单词，多光标同时修改 <c-k>触发
 Plug 'terryma/vim-multiple-cursors'
 " <leader-cn/cc>注释 cu反注释 ca切换注释样式
@@ -628,8 +628,7 @@ silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 "let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-snippets']
 "let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint']
 let g:coc_global_extensions = ['coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint']
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
 	let col = col('.') - 1
@@ -640,6 +639,11 @@ inoremap <silent><expr> <Tab>
 			\ <SID>check_back_space() ? "\<Tab>" :
 			\ coc#refresh()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <silent><expr> <CR> pumvisible() ? "\<C-y><CR>" : "\<CR>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 " Useful commands
 nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
@@ -970,6 +974,7 @@ nnoremap - N
 " ===
 " === vim-go
 " ===
+let g:go_def_mapping_enabled = 0
 let g:go_template_autocreate = 0
 let g:go_textobj_enabled = 0
 let g:go_auto_type_info = 1
