@@ -703,11 +703,14 @@ inoremap <silent><expr> <Tab>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<Tab>" :
 			\ coc#refresh()
+" shift+tab代替up
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" #代表匹配大小写
 function! s:check_back_space() abort
 	let col = col('.') - 1
 	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+" c-space触发补全
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Open up coc-commands
