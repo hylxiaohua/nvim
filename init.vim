@@ -616,6 +616,7 @@ Plug 'ryanoasis/vim-devicons'
 " 让不同层次的括号显示不同颜色， :rainbowtoggle触发
 Plug 'luochen1990/rainbow'
 " 一种buffer/tab/的显示工具，在最上角，方便切换。
+" 还有一种过滤buffer的功能，但文档里的切换快捷键没效果。
 Plug 'mg979/vim-xtabline'
 " erminus enhances Vim's and Neovim's integration with the terminal in four ways
 Plug 'wincent/terminus'
