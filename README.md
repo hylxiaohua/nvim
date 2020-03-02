@@ -444,10 +444,7 @@ Press `ts` to **translate word under cursor**.
 | `,3`     | ### H3              |
 | `,4`     | #### H4             |
 | `,l`     | --------            |
-
-`,f` to go to the next `<++>` (placeholder)
-
-`,w` to go to the next `<++>` (placeholder) and then press `Enter` for you
+`<leader> <leader>` to go to the next `<++>` (placeholder) and then edit it
 
 ## Some Weird Stuff
 ### Press `tx` and enter your text

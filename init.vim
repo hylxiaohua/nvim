@@ -454,14 +454,18 @@ Plug 'jaxbot/semantic-highlight.vim'
 Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
 
 " File navigation
+" 这句效果在于tags ag的可视化，但没有这个，:FZF也可以用
 Plug 'junegunn/fzf.vim'
 "Plug 'yuki-ycino/fzf-preview.vim'
+" 如果fzf不是本地安装，类似于公司的那种离线环境，一定要加，把dir路径替换即可。
 "Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 "Plug 'junegunn/fzf'
 " ranger浮动窗口
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
 " Taglist
+" 按T默认是以ctags打开的，但是还有一种方式是coc，coc更全一点，有的工程ctags可能就没有了。
+" 还有个功能就是find,就类似于fzf-tags，输入: Vista finder coc/ctags即可。
 Plug 'liuchengxu/vista.vim'   "按 T 触发
 
 " Debugger

@@ -6,7 +6,7 @@
 	"suggest.detailField": "preview",
 	"suggest.detailMaxLength": 60,
 	"suggest.maxCompleteItemCount": 50,
-	"suggest.numberSelect": true,
+	"suggest.numberSelect": false,
 	"suggest.noselect": true,
 	"suggest.enablePreselect": false,
 	"suggest.triggerAfterInsertEnter": false,
