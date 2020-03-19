@@ -1292,6 +1292,12 @@ let g:vmt_fence_closing_text = '/TOC'
 let g:rnvimr_ex_enable = 1
 let g:rnvimr_pick_enable = 1
 nnoremap <silent> R :RnvimrSync<CR>:RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
+let g:rnvimr_layout = { 'relative': 'editor',
+            \ 'width': &columns,
+            \ 'height': &lines,
+            \ 'col': 0,
+            \ 'row': 0,
+            \ 'style': 'minimal' }
 let g:rnvimr_presets = [{'width': 0.7, 'height': 0.7}]
 
 
