@@ -430,6 +430,9 @@ call plug#begin('~/.config/nvim/plugged')
 "Plug 'tiagofumo/dart-vim-flutter-layout'
 " 说是可以高亮当前光标下的变量，但好像没效果
 Plug 'RRethy/vim-illuminate'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'KabbAmine/vCoolor.vim'
+Plug 'pechorin/any-jump.vim'
 
 " Testing my own plugin
 Plug 'theniceboy/vim-calc'
@@ -439,19 +442,20 @@ Plug 'theniceboy/vim-calc'
 Plug 'theniceboy/eleline.vim'
 Plug 'bling/vim-bufferline'
 "Plug 'liuchengxu/space-vim-theme'
-"Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 "Plug 'ayu-theme/ayu-vim'
 "Plug 'rakr/vim-one'
 "Plug 'mhartington/oceanic-next'
 "Plug 'kristijanhusak/vim-hybrid-material'
 "一种colortheme
-Plug 'ajmwagar/vim-deus'
+"Plug 'ajmwagar/vim-deus'
 "Plug 'arzg/vim-colors-xcode'
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
 "说是可以给不同的变量高亮成不同颜色，但试了没啥用。
-Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
+"Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
+Plug 'norcalli/nvim-colorizer.lua'
 
 " File navigation
 " 这句效果在于tags ag的可视化，但没有这个，:FZF也可以用
@@ -478,6 +482,7 @@ Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-
 
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'wellle/tmux-complete.vim'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -658,8 +663,8 @@ set background=dark
 
 "color dracula
 "color one
-color deus
-"color gruvbox
+"color deus
+color gruvbox
 "let ayucolor="light"
 "color ayu
 "set background=light
@@ -694,7 +699,7 @@ nnoremap <LEADER>g+ :GitGutterNextHunk<CR>
 " ===
 " fix the most annoying bug that coc has
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter']
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "nmap <silent> <TAB> <Plug>(coc-range-select)
 "xmap <silent> <TAB> <Plug>(coc-range-select)
