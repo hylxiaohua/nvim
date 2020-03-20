@@ -279,10 +279,17 @@ And Within rnvimr (ranger), you can:
 
 ### Text Editing Plugins
 #### vim-table-mode
-| Shortcut        | Action            |
-|-----------------|-------------------|
-| `SPACE` `t` `m` | Toggle table mode |
-| `SPACE` `t` `r` | Realign table     |
+- 可以像 `aw`和`iw`一样，使用`a|`和`i|`, 实测是`i|`没用
+- 可以在cell中移动，不过快捷键太脑残了
+- 可以用简单的excel公式的功能
+| Shortcut        | Action								|
+|-----------------|-----------------------|
+| `SPACE` `t` `m` | Toggle table mode     |
+| `SPACE` `t` `r` | Realign table         |
+| `SPACE` `t` `t` | format csv to table   |
+| `SPACE` `tdd`		| delete row						|
+| `SPACE` `tdc`		| delete column					|
+| `|` `|`					| generate dividing line|
 
 See `:help table-mode.txt` for more.
 
