@@ -489,15 +489,29 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Undo Tree
-" 临时恢复文件，救命用的
+" 用途：临时恢复文件，救命用的
+" <leader,L>触发
 Plug 'mbbill/undotree'
 
 " Git
 " This plugin provides syntax highlighting and up-to-date code snippets for .gitignore file.
 Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
 Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
-"Plug 'mhinz/vim-signify'
-" 一种git diff的preview插件
+
+"
+"用途：高亮于文件改动的内容
+""Plug 'mhinz/vim-signify'
+" 用途：git diff的preview插件
+" :GitGutterLineHighLightEnable  --hunk高亮
+" :GitGutterLineHighLightToggle  --enable/disable切换
+" :GitGutterLineNrHighLightToggle --neovim中可在左侧显示修改类型和行号
+" :GitGutterSignToogle --只有修改类型
+" hunk：修改块，就是diff后的>>> <<<之间的内容
+" next hunk: <leader>g+
+" previos hunk: <leader>g-
+" :GitGutterQuickFix 将gutter转入quickfix
+" 可以用g:gitgutter_use_location_list转入location list
+" 撤销/反撤销  undohunk和stagehunk
 Plug 'airblade/vim-gitgutter'
 
 " Tex
