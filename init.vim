@@ -360,7 +360,7 @@ nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
 noremap <space>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
-noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
+" noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 
 " Spelling Check with <space>sc
 noremap <LEADER>sc :set spell!<CR>
@@ -426,62 +426,118 @@ endfunc
 " ===
 
 call plug#begin('~/.config/nvim/plugged')
+
 " dark是一种语言，flutter是框架
 "Plug 'tiagofumo/dart-vim-flutter-layout'
-" 说是可以高亮当前光标下的变量，但好像没效果
+
+" 用途：
+" 可以高亮当前光标下的变量
+" 可配置的地方如下：
+" 1. 触发延迟
+" 2. 样式，默认是高亮,但不明显，可改为下划线
+" 3. 设置文件过滤功能
+" 4. 设置语言过滤功能(比如c的文件名和注释中的同名变量)
 Plug 'RRethy/vim-illuminate'
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'KabbAmine/vCoolor.vim'
+
+" 用途：
+" 可以一行拆多行，多行拆一行，对c/python而言，简直是鸡肋。
+"myfunction(arg1, arg2, arg3);
+"myfunction(arg1,
+				"arg2,
+				"arg3);
+"Plug 'AndrewRadev/splitjoin.vim'
+
+" 用途：一个颜色拾取器
+" <alt-r> <alt-v> <alt-w>可以分别rgb hsl rgba下选中一个颜色
+" 自动转换成对应的值
+" 相关配置：
+" 1. 转换后的值的大小写
+" 2. 几种格式的相互转换
+" 3. 指定外部的颜色拾取器
+"Plug 'KabbAmine/vCoolor.vim'
+
+" 用途：一个跳转工具，简直碉堡。
+" AnyJump：会查找当前光标下的单词的定义和引用，以一个浮动窗口的形式体现
+" AnyJumpVisual：同上，在visual模式下使用
+" AnyJumpBack：会打开之前jump的文件，实测好像有问题
+" AnyJumpLastResult：重新打开浮动窗口
+" 在浮动窗口的操作：
+" o:open  s:split v:vsplit t:tab q:exit
+" p:preview -赞
+" L: 换了种显示方式
+" b: 跳到开头
+" r：references 打开或关闭references
+" T：group by file
+" 配置：
+" 就是针对以上功能的开闭，显示的样式，还有查找器(ag,rg)等
 Plug 'pechorin/any-jump.vim'
 
 " Testing my own plugin
-Plug 'theniceboy/vim-calc'
+"Plug 'theniceboy/vim-calc'
 
 " Pretty Dress
-" 状态栏
-Plug 'theniceboy/eleline.vim'
+" 用途：最底下的状态栏，支持coc vista等
+"Plug 'theniceboy/eleline.vim'
+Plug 'liuchengxu/eleline.vim'
 Plug 'bling/vim-bufferline'
+
+" Color Theme
 "Plug 'liuchengxu/space-vim-theme'
 Plug 'morhetz/gruvbox'
 "Plug 'ayu-theme/ayu-vim'
 "Plug 'rakr/vim-one'
 "Plug 'mhartington/oceanic-next'
 "Plug 'kristijanhusak/vim-hybrid-material'
-"一种colortheme
 "Plug 'ajmwagar/vim-deus'
 "Plug 'arzg/vim-colors-xcode'
 
 " Genreal Highlighter
+
+" 用途：给不同的变量不同的颜色，给力
+" :SemanticHighlightToggle
 Plug 'jaxbot/semantic-highlight.vim'
+
 "说是可以给不同的变量高亮成不同颜色，但试了没啥用。
 "Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
-Plug 'norcalli/nvim-colorizer.lua'
+
+" 没效果，不知道怎么配置，应该是需要lua的。
+"Plug 'norcalli/nvim-colorizer.lua'
 
 " File navigation
-" 这句效果在于tags ag的可视化，但没有这个，:FZF也可以用
+
+"" 用途：tags ag的可视化，但没有这个，:FZF也可以用
 Plug 'junegunn/fzf.vim'
 "Plug 'yuki-ycino/fzf-preview.vim'
-" 如果fzf不是本地安装，类似于公司的那种离线环境，一定要加，把dir路径替换即可。
+" 离线安装
 "Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+" 在线安装,manjaro上直接pacman即可，因此注释
 "Plug 'junegunn/fzf'
-" ranger浮动窗口
+
+" 用途：ranger浮动窗口
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
 " Taglist
-" 按T默认是以ctags打开的，但是还有一种方式是coc，coc更全一点，有的工程ctags可能就没有了。
-" 还有个功能就是find,就类似于fzf-tags，输入: Vista finder coc/ctags即可。
+
+" 用途:tag列表
+" T  --加载ctags的符号
+" :Vista coc --加载coc的符号,符号更全一些
+" :Vista finder coc/ctags -- 查找符号
 Plug 'liuchengxu/vista.vim'   "按 T 触发
 
 " Debugger
 Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python'}
 
 " REPL
+" ruby用的
 "Plug 'rhysd/reply.vim'
 
 " Error checking, handled by coc
 
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" 用途：可以在vim中补全 邻近的tmux的pane中的内容
+" 没有快捷键，直接用
+" 配置：选择触发的方式
 Plug 'wellle/tmux-complete.vim'
 
 " Snippets
@@ -511,7 +567,12 @@ Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 " previos hunk: <leader>g-
 " :GitGutterQuickFix 将gutter转入quickfix
 " 可以用g:gitgutter_use_location_list转入location list
-" 撤销/反撤销  undohunk和stagehunk
+" 撤销 undohunk
+" stagehunk：相当于commit了这个hunk的前一步
+" 预览: H
+" ic ac --类似vim的iw 和 aw
+" 折叠非hunk：<leader>gf
+" 可在statusline显示状态
 Plug 'airblade/vim-gitgutter'
 
 " Tex
@@ -520,6 +581,7 @@ Plug 'lervag/vimtex'
 " CSharp
 " OmniSharp-vim is a plugin for Vim to provide IDE like abilities for C#.
 Plug 'OmniSharp/omnisharp-vim'
+" 用途：一种fuzzy finder
 Plug 'ctrlpvim/ctrlp.vim' , { 'for': ['cs', 'vim-plug'] } " omnisharp-vim dependency
 
 " HTML, CSS, JavaScript, PHP, JSON, etc.
@@ -536,14 +598,37 @@ Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javas
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 
 " Python
-" 折叠代码用的，好像只是提供了折叠import，和注释的功能，但尝试了一下，没效果
+" 用途：折叠代码用的，只提供了折叠import，和注释的功能，
+" zc/zo 折叠/展开
+" 配置：
+" g:SimpylFold_docstring_preview 会显示折叠后注释的第一行。
 Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
-" 高亮
+" 用途：语法高亮
+" :Semshi enbale/disable/toggle/pause/highlight/clear
+" rename
+" error gotoerror
+" goto (name|function|class) (next|prev|first|last)
+" 配置：
+" 1. group
+" 2. mark_select_nodes：光标下单词在作用域的同名高亮
+" 3. no_default_builin_highlight：关闭vim自带的python高亮
+" 4. 简化maskup --不懂
+" 5. 每次输入后更新highlight
+" 6. 语法错误高亮
+" 7. 延迟时间
+" 8. g:semshi#self_to_attribute  --是否高亮self
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
 "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 "Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
-" Text objects, folding, and more for Python and other indented languages
+" 用途: 快速选中段落/folding等功能
+" 快速选中段落：iP/aP
+" object motions：]] 每级缩进间移动
+"									[/]]M 可以跳转函数
+"	fold: 建议选中，不然自带的za/zc很烂
+"	highlight：缩进的高亮
+"	自动缩进
+"	easymotion
 Plug 'tweekmonster/braceless.vim'
 
 " Flutter
@@ -559,41 +644,85 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 "根据markdown的标题，生成目录用的
 Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown'] }
-" 管理bullet lists(项目符号列表)，不知道怎么用。
+
+" 用途：管理bullet lists(就是md的有序/无序列表)。
+" <c-d> 退回一级缩进
+" <c-t> 增加一级缩进
 Plug 'theniceboy/bullets.vim'
 
 " Other filetypes
 Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
 
 " Editor Enhancement
+
 "Plug 'Raimondi/delimitMate'
-" 处理 pairs""的插件
+" 用途：处理 pairs""的插件
+" 快速加括号：
+"   input: (|){["foo"]} (press <M-}> at |)
+"   output: ({["foo"]}|)
+" 跳转到pair的结尾处
+"		}
 Plug 'jiangmiao/auto-pairs'
 " 选中同一个单词，多光标同时修改 <c-k>触发,暂时还不知道怎么取消，回到上一个
+" 用途：visual block模式的一个增强，很给力
+" <c-down> <c-up> 可以解决，visual block没有列对齐的短板
+" shift+arrow 字符可视模式
 Plug 'mg979/vim-visual-multi'
 " <leader-cn/cc>注释 cu反注释 ca切换注释样式
+" <leader-c<space>> toggle
+" <leader-cm> 多行注释
+" <leader-cs> 如下形式：
+"  /*
+"  *
+"  */
+" <leader-cA> 在行尾添加注释
+" <leader-cl> 左端对齐  cb 两端对齐(/**/)
 Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
-" 没看懂，感觉把一段文本映射成另一段
+" 用途：true <-> false的转换
 Plug 'AndrewRadev/switch.vim' " gs to switch
-" 添加 '' 改变‘’
+" 用途：surround.vim
+" cs + xy  : x="" y=''
+" ds + x : remove x
+" ys + iw + x
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
-" 快速选中，还没摸索出实际用处
-Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
-" da= to delete what's after =
-Plug 'junegunn/vim-after-object' " da= to delete what's after =
-Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph,
-" 锁定大小写的，没啥用
-Plug 'tpope/vim-capslock'	" Ctrl+L (insert) to toggle capslock
+" 用途：快速选中
+" <Enter>  选中当前光标下的被''之类包裹的text <BS>可撤销
+Plug 'gcmt/wildfire.vim'
+" 用途：快速选中 = 后面的内容
+" v/c/d/y + a + =  visual/change/delete/yank =后面的内容
+Plug 'junegunn/vim-after-object'
+" 用途：快速对齐
+" gaip= to align the = in paragraph
+" vipga 同上的效果
+Plug 'junegunn/vim-easy-align' " ,
+" 用途：锁定大小写的
+" Plug 'tpope/vim-capslock'	" Ctrl+L (insert) to toggle capslock
+" 用途：快速移动
+" <leader><leader>h/l/w
+" <leader><leader>f
+" 还可以两个/n个字符搜索
+" repeat
 Plug 'easymotion/vim-easymotion'
-Plug 'unblevable/quick-scope' " quickscope 更高效的行内移动, f/F/t/T, 才触发
+
+" 用途：对f/F/t/T的一个增强。
+" 首先，会高亮除当前单词出现的字母之外的首个字母。如果是第2次出现的，会用不同的颜色高亮
+" 然后就没用途了。
+"Plug 'unblevable/quick-scope' " quickscope 更高效的行内移动, f/F/t/T, 才触发
+"
+" 用途：自动折叠
 " 还没摸索出怎么用
 Plug 'Konfekt/FastFold'
-" 去除行尾空格
+" 用途：去除行尾空格
 Plug 'bronson/vim-trailing-whitespace'
-" 显示寄存器的值 "触发
+" 用途：显示寄存器的值
+" "触发
 Plug 'junegunn/vim-peekaboo'
 "Plug 'wellle/context.vim'
-"一种批量的替换工具
+"用途：一种快速替换工具
+" s+motion：用默认剪切板里的替换motion
+" s+motion+motion(range motion)
+" 自定义text object
+" 替换确认
 Plug 'svermeulen/vim-subversive'
 
 " Input Method Autoswitch
@@ -604,7 +733,7 @@ Plug 'svermeulen/vim-subversive'
 Plug 'Chiel92/vim-autoformat'
 
 " For general writing
-" 一种全体居中，适合阅读的一种模式，有点像word的两端对齐
+" 用途：一种全体居中，适合阅读的一种模式，有点像word的两端对齐
 Plug 'junegunn/goyo.vim'
 "Plug 'reedes/vim-wordy'
 "Plug 'ron89/thesaurus_query.vim'
@@ -617,7 +746,7 @@ Plug 'MattesGroeger/vim-bookmarks'
 " Find & Replace
 " 多个文件之间的替换和查找
 Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
-" 目测是查找时 显示 x/y的
+" 用途：查找时 显示 x/y的
 Plug 'osyo-manga/vim-anzu'
 
 " Documentation
@@ -630,13 +759,13 @@ Plug 'osyo-manga/vim-anzu'
 "Plug 'mhinz/vim-startify'
 
 " Vim Applications
-" 一个日历加备忘录
+" 用途：一个日历加备忘录
 Plug 'itchyny/calendar.vim'
 
 " Other visual enhancement
 " 给一些Needtree之类的加一些图标
 Plug 'ryanoasis/vim-devicons'
-" 让不同层次的括号显示不同颜色， :rainbowtoggle触发
+" 用途：让不同层次的括号显示不同颜色
 Plug 'luochen1990/rainbow'
 " 一种buffer/tab/的显示工具，在最上角，方便切换。
 " 还有一种过滤buffer的功能，但文档里的切换快捷键没效果。
@@ -645,7 +774,7 @@ Plug 'mg979/vim-xtabline'
 Plug 'wincent/terminus'
 
 " Other useful utilities
-" 忘记加sudo了可以用
+" 用途：忘记加sudo了可以用
 Plug 'lambdalisue/suda.vim' " do stuff like :sudowrite
 " pdf阅读，体验很差，公式完全没有
 Plug 'makerj/vim-pdf'
@@ -701,11 +830,18 @@ let g:gitgutter_signs = 0
 let g:gitgutter_map_keys = 0
 let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_preview_win_floating = 1
+"let g:gitgutter_use_location_list = 1
 autocmd BufWritePost * GitGutter
 nnoremap <LEADER>gf :GitGutterFold<CR>
 nnoremap H :GitGutterPreviewHunk<CR>
 nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
 nnoremap <LEADER>g+ :GitGutterNextHunk<CR>
+
+
+" ===
+" === python
+" ===
+autocmd FileType python BracelessEnable +indent +fold +highlight
 
 
 " ===
@@ -946,9 +1082,6 @@ endfunc
 "let g:VM_default_mappings = 0
 let g:VM_leader = {'default': ',', 'visual': ',', 'buffer': ','}
 let g:VM_maps = {}
-let g:VM_custom_motions  = {'n': 'h', 'i': 'l', 'u': 'k', 'e': 'j', 'N': '0', 'I': '$', 'h': 'e'}
-let g:VM_maps['i']         = 'k'
-let g:VM_maps['I']         = 'K'
 let g:VM_maps['Find Under']         = '<C-k>'
 let g:VM_maps['Find Subword Under'] = '<C-k>'
 let g:VM_maps['Find Next']         = ''
@@ -1170,10 +1303,11 @@ let g:colorizer_syntax = 1
     map <Leader><Leader>j <Plug>(easymotion-j)
     map <Leader><Leader>k <Plug>(easymotion-k)
     map <Leader><leader>l <Plug>(easymotion-lineforward)
+		map <Leader><leader>w <Plug>(easymotion-w)
     " 重复上一次操作, 类似repeat插件, 很强大
     map <Leader><leader>. <Plug>(easymotion-repeat)
-		map ' <Plug>(easymotion-bd-f)
-		nmap ' <Plug>(easymotion-bd-f)
+		map <leader><leader>f <Plug>(easymotion-bd-f)
+		nmap <leader><leader>f <Plug>(easymotion-overwin-f)
 " }}}
 
 " ===
