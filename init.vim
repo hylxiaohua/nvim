@@ -573,6 +573,9 @@ Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 " ic ac --类似vim的iw 和 aw
 " 折叠非hunk：<leader>gf
 " 可在statusline显示状态
+" :currentFormatter  当前的format
+" next/prev format 备选
+" 可以更改优先级，同一个文件的不同部分执行不同的format等t
 Plug 'airblade/vim-gitgutter'
 
 " Tex
@@ -730,6 +733,11 @@ Plug 'svermeulen/vim-subversive'
 
 " Formatter
 " 按\f触发，试了下c++下，完全是垃圾
+" 支持多种语言，每种语言用一种不同的format来执行，比如c++是clang
+" 可以自由选择，也可以自定义，设置过滤等。
+" :currentFormatter  当前的format
+" next/prev format 备选
+" 可以更改优先级，同一个文件的不同部分执行不同的format等
 Plug 'Chiel92/vim-autoformat'
 
 " For general writing
@@ -741,10 +749,24 @@ Plug 'junegunn/goyo.vim'
 " Bookmarks
 " 打标记用的
 "Plug 'kshenoy/vim-signature'
+" 用途: 书签
+" toggle书签  给书签加注释
+" 书签移动  show all bookmarks
+" move bookmarks
+" 保存书签至一个文件 或者相反
 Plug 'MattesGroeger/vim-bookmarks'
 
 " Find & Replace
-" 多个文件之间的替换和查找
+" 用途：多个文件之间的替换和查找
+" only search:  :F {pattern} {file-mask} [params]
+" replace:  :Far {pattern} {replace-with} {file-mask} [params]
+" 交互模式  :Farr = :Far  :Farf = :F
+" 在弹出的窗口 执行:Fardo 执行替换
+" :FarUndo  试了没反映
+" :Refar ：执行上一条命令
+" 在弹出的窗口执行 :help far.vim 可以获取帮助
+"  里面的mapping很有用
+" 还有一些扩展功能，详见extras
 Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
 " 用途：查找时 显示 x/y的
 Plug 'osyo-manga/vim-anzu'
@@ -767,16 +789,23 @@ Plug 'itchyny/calendar.vim'
 Plug 'ryanoasis/vim-devicons'
 " 用途：让不同层次的括号显示不同颜色
 Plug 'luochen1990/rainbow'
-" 一种buffer/tab/的显示工具，在最上角，方便切换。
-" 还有一种过滤buffer的功能，但文档里的切换快捷键没效果。
+" 用途：在tabline上显示 tabs/buffer/arglist
+" ,x + ? ：显示所有的快捷键
+" bn/bp/bq : buffer_next buffer_prev buffer_close
+" to: cycle mode
+" 过滤buffer-默认根据当前文件夹
+" rename tab或者设置不同的图标
+" 配置：
+" enable-mapping: 开启默认的快捷键
 Plug 'mg979/vim-xtabline'
-" erminus enhances Vim's and Neovim's integration with the terminal in four ways
+" 用途：vim自带终端的一种增强
 Plug 'wincent/terminus'
 
 " Other useful utilities
 " 用途：忘记加sudo了可以用
 Plug 'lambdalisue/suda.vim' " do stuff like :sudowrite
-" pdf阅读，体验很差，公式完全没有
+" 用途：pdf阅读，
+" 体验很差，公式完全没有
 Plug 'makerj/vim-pdf'
 "Plug 'xolox/vim-session'
 "Plug 'xolox/vim-misc' " vim-session dep
@@ -1095,6 +1124,7 @@ let g:VM_maps["Redo"]      = '<C-r>'
 " ===
 " === Far.vim
 " ===
+let g:far#enable_undo=1
 noremap <LEADER>f :F  **/*<left><left><left><left><left>
 let g:far#mapping = {
 		\ "replace_undo" : ["l"],
@@ -1373,10 +1403,12 @@ let g:rainbow_active = 1
 " === xtabline
 " ===
 let g:xtabline_settings = {}
-let g:xtabline_settings.enable_mappings = 0
+let g:xtabline_settings.enable_mappings = 1
 let g:xtabline_settings.tabline_modes = ['tabs', 'buffers']
-let g:xtabline_settings.enable_persistance = 0
 let g:xtabline_settings.last_open_first = 1
+noremap bn :XTabNextBuffer<CR>
+noremap bp :XTabPrevBuffer<CR>
+noremap bq :XTabCloseBuffer<CR>
 noremap to :XTabCycleMode<CR>
 noremap \p :XTabInfo<CR>
 
