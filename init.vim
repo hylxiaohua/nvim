@@ -429,7 +429,8 @@ call plug#begin('~/.config/nvim/plugged')
 
 " dark是一种语言，flutter是框架
 "Plug 'tiagofumo/dart-vim-flutter-layout'
-
+"
+Plug 'voldikss/vim-floaterm'
 " 用途：
 " 可以高亮当前光标下的变量
 " 可配置的地方如下：
@@ -472,16 +473,50 @@ Plug 'RRethy/vim-illuminate'
 " 就是针对以上功能的开闭，显示的样式，还有查找器(ag,rg)等
 Plug 'pechorin/any-jump.vim'
 
-" Testing my own plugin
-"Plug 'theniceboy/vim-calc'
+"Plug 'liuchengxu/vim-which-key' , { 'on': ['WhichKey', 'WhichKey!'] }
+Plug 'liuchengxu/vim-which-key'
+let g:mapleader = ','
+let g:maplocalleader = "\<Space>"
+" By default timeoutlen is 1000 ms
+set timeout
+set timeoutlen=500
+let g:which_key_map = {}
+let g:which_key_map['name'] = "neovim root by hyl"
+let g:which_key_map['h'] = "window-left"
+let g:which_key_map['j'] = "window-down"
+let g:which_key_map['k'] = "window-up"
+let g:which_key_map['l'] = "window-right"
 
-" Pretty Dress
+nnoremap <silent> <leader>oq  :copen<CR>
+nnoremap <silent> <leader>ol  :lopen<CR>
+let g:which_key_map.c = {'name' : 'comment'}
+let g:which_key_map.g = {'name' : 'git'}
+let g:which_key_map.b = {
+      \ 'name' : '+buffer' ,
+      \ 'd' : ['bd'        , 'delete-buffer']   ,
+      \ 'f' : ['bfirst'    , 'first-buffer']    ,
+      \ 'l' : ['blast'     , 'last-buffer']     ,
+      \ 'n' : ['bnext'     , 'next-buffer']     ,
+      \ 'p' : ['bprevious' , 'previous-buffer'] ,
+      \ '?' : ['Buffers'   , 'fzf-buffer']      ,
+      \ }
+
+autocmd VimEnter * call which_key#register(',', "g:which_key_map")
+nnoremap <silent> <leader> :WhichKey ','<CR>
+vnoremap <silent> <leader> :WhichKeyVisual ','<CR>
+
+
+" ################### 美化 ######################
+
 " 用途：最底下的状态栏，支持coc vista等
 "Plug 'theniceboy/eleline.vim'
 Plug 'liuchengxu/eleline.vim'
 Plug 'bling/vim-bufferline'
+Plug 'Yggdroot/indentLine'
+"let g:indentLine_setColors = 0
+let g:indentLine_char = '|'
 
-" Color Theme
+" ################### 颜色主题 ######################
 "Plug 'liuchengxu/space-vim-theme'
 Plug 'morhetz/gruvbox'
 "Plug 'ayu-theme/ayu-vim'
@@ -491,7 +526,7 @@ Plug 'morhetz/gruvbox'
 "Plug 'ajmwagar/vim-deus'
 "Plug 'arzg/vim-colors-xcode'
 
-" Genreal Highlighter
+" ################### 高亮 ######################
 
 " 用途：给不同的变量不同的颜色，给力
 " :SemanticHighlightToggle
@@ -503,7 +538,7 @@ Plug 'jaxbot/semantic-highlight.vim'
 " 没效果，不知道怎么配置，应该是需要lua的。
 "Plug 'norcalli/nvim-colorizer.lua'
 
-" File navigation
+" ############## File navigation ##################
 
 "" 用途：tags ag的可视化，但没有这个，:FZF也可以用
 Plug 'junegunn/fzf.vim'
@@ -516,47 +551,55 @@ Plug 'junegunn/fzf.vim'
 " 用途：ranger浮动窗口
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
-" Taglist
-
+" ############## Tag ##################
 " 用途:tag列表
 " T  --加载ctags的符号
 " :Vista coc --加载coc的符号,符号更全一些
 " :Vista finder coc/ctags -- 查找符号
 Plug 'liuchengxu/vista.vim'   "按 T 触发
 
-" Debugger
+" ############## Debugger ##################
+
+" 目前neovim的有些功能还没实现，是一个开发中的插件
+" 支持多种语言
+" ./install_gadget.py 后选择要安装的gadgets
+" 需要写一个vimsepector.json文件，类似于Lsp的那种文件
+" 插件基于DAP协议(Debug Adapter Protocol)，类似于LSP
+" 每一个gadget会有一个gadgets.json，和vimsepector.json类似
 Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python'}
 
 " REPL
 " ruby用的
 "Plug 'rhysd/reply.vim'
 
-" Error checking, handled by coc
+" ##########  Error checking, handled by coc ##############
 
-" Auto Complete
+" ############# Auto Complete ################
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " 用途：可以在vim中补全 邻近的tmux的pane中的内容
 " 没有快捷键，直接用
 " 配置：选择触发的方式
 Plug 'wellle/tmux-complete.vim'
 
-" Snippets
+" ############## Snippets #################
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
-" Undo Tree
+" ############# Undo Tree ##################
 " 用途：临时恢复文件，救命用的
 " <leader,L>触发
 Plug 'mbbill/undotree'
 
-" Git
+" ############### Git ###################
 " This plugin provides syntax highlighting and up-to-date code snippets for .gitignore file.
 Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
 Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 
-"
-"用途：高亮于文件改动的内容
-""Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-fugitive'
+
+" 用途：高亮于文件改动的内容
+"Plug 'mhinz/vim-signify'
+
 " 用途：git diff的preview插件
 " :GitGutterLineHighLightEnable  --hunk高亮
 " :GitGutterLineHighLightToggle  --enable/disable切换
@@ -578,16 +621,11 @@ Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 " 可以更改优先级，同一个文件的不同部分执行不同的format等t
 Plug 'airblade/vim-gitgutter'
 
-" Tex
+" ################## Tex ###################
 Plug 'lervag/vimtex'
 
-" CSharp
-" OmniSharp-vim is a plugin for Vim to provide IDE like abilities for C#.
-Plug 'OmniSharp/omnisharp-vim'
-" 用途：一种fuzzy finder
-Plug 'ctrlpvim/ctrlp.vim' , { 'for': ['cs', 'vim-plug'] } " omnisharp-vim dependency
 
-" HTML, CSS, JavaScript, PHP, JSON, etc.
+" ############### 语言相关 #####################
 Plug 'elzr/vim-json'
 Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
@@ -596,17 +634,18 @@ Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', '
 Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 "Plug 'jaxbot/browserlink.vim'
-
-" Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
+Plug 'keith/swift.vim'
 
-" Python
+" ################ Python ################
 " 用途：折叠代码用的，只提供了折叠import，和注释的功能，
 " zc/zo 折叠/展开
 " 配置：
 " g:SimpylFold_docstring_preview 会显示折叠后注释的第一行。
 Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
+
 Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
+
 " 用途：语法高亮
 " :Semshi enbale/disable/toggle/pause/highlight/clear
 " rename
@@ -622,8 +661,10 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
 " 7. 延迟时间
 " 8. g:semshi#self_to_attribute  --是否高亮self
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
+
 "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 "Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
+
 " 用途: 快速选中段落/folding等功能
 " 快速选中段落：iP/aP
 " object motions：]] 每级缩进间移动
@@ -634,17 +675,16 @@ Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-p
 "	easymotion
 Plug 'tweekmonster/braceless.vim'
 
-" Flutter
+" #################### Flutter ######################
 "Plug 'dart-lang/dart-vim-plugin'
 "Plug 'thosakwe/vim-flutter'
 
-" Swift
-Plug 'keith/swift.vim'
-
-" Markdown
+" ################# Markdown ##################
 "Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
+
 "根据markdown的标题，生成目录用的
 Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown'] }
 
@@ -653,12 +693,13 @@ Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown'] }
 " <c-t> 增加一级缩进
 Plug 'theniceboy/bullets.vim'
 
-" Other filetypes
+" ################## Other filetypes ###################
 Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
 
-" Editor Enhancement
+" ################# Editor Enhancement ################
 
 "Plug 'Raimondi/delimitMate'
+
 " 用途：处理 pairs""的插件
 " 快速加括号：
 "   input: (|){["foo"]} (press <M-}> at |)
@@ -666,6 +707,7 @@ Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
 " 跳转到pair的结尾处
 "		}
 Plug 'jiangmiao/auto-pairs'
+
 " 选中同一个单词，多光标同时修改 <c-k>触发,暂时还不知道怎么取消，回到上一个
 " 用途：visual block模式的一个增强，很给力
 " <c-down> <c-up> 可以解决，visual block没有列对齐的短板
@@ -680,24 +722,31 @@ Plug 'mg979/vim-visual-multi'
 "  */
 " <leader-cA> 在行尾添加注释
 " <leader-cl> 左端对齐  cb 两端对齐(/**/)
+
 Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
+
 " 用途：true <-> false的转换
 Plug 'AndrewRadev/switch.vim' " gs to switch
+
 " 用途：surround.vim
 " cs + xy  : x="" y=''
 " ds + x : remove x
 " ys + iw + x
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
+
 " 用途：快速选中
 " <Enter>  选中当前光标下的被''之类包裹的text <BS>可撤销
 Plug 'gcmt/wildfire.vim'
+
 " 用途：快速选中 = 后面的内容
 " v/c/d/y + a + =  visual/change/delete/yank =后面的内容
 Plug 'junegunn/vim-after-object'
+
 " 用途：快速对齐
 " gaip= to align the = in paragraph
 " vipga 同上的效果
-Plug 'junegunn/vim-easy-align' " ,
+Plug 'junegunn/vim-easy-align' 
+
 " 用途：锁定大小写的
 " Plug 'tpope/vim-capslock'	" Ctrl+L (insert) to toggle capslock
 " 用途：快速移动
@@ -711,15 +760,17 @@ Plug 'easymotion/vim-easymotion'
 " 首先，会高亮除当前单词出现的字母之外的首个字母。如果是第2次出现的，会用不同的颜色高亮
 " 然后就没用途了。
 "Plug 'unblevable/quick-scope' " quickscope 更高效的行内移动, f/F/t/T, 才触发
-"
+
 " 用途：自动折叠
-" 还没摸索出怎么用
+" 还没摸索出怎么用, 这个真的不能生效
 Plug 'Konfekt/FastFold'
+
 " 用途：去除行尾空格
 Plug 'bronson/vim-trailing-whitespace'
 " 用途：显示寄存器的值
 " "触发
 Plug 'junegunn/vim-peekaboo'
+
 "Plug 'wellle/context.vim'
 "用途：一种快速替换工具
 " s+motion：用默认剪切板里的替换motion
@@ -740,15 +791,17 @@ Plug 'svermeulen/vim-subversive'
 " 可以更改优先级，同一个文件的不同部分执行不同的format等
 Plug 'Chiel92/vim-autoformat'
 
-" For general writing
+" ############## For general writing ################
 " 用途：一种全体居中，适合阅读的一种模式，有点像word的两端对齐
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 "Plug 'reedes/vim-wordy'
 "Plug 'ron89/thesaurus_query.vim'
 
-" Bookmarks
+" ################### Bookmarks ###################
 " 打标记用的
 "Plug 'kshenoy/vim-signature'
+
 " 用途: 书签
 " toggle书签  给书签加注释
 " 书签移动  show all bookmarks
@@ -756,7 +809,7 @@ Plug 'junegunn/goyo.vim'
 " 保存书签至一个文件 或者相反
 Plug 'MattesGroeger/vim-bookmarks'
 
-" Find & Replace
+" ################## Find & Replace ####################
 " 用途：多个文件之间的替换和查找
 " only search:  :F {pattern} {file-mask} [params]
 " replace:  :Far {pattern} {replace-with} {file-mask} [params]
@@ -768,6 +821,7 @@ Plug 'MattesGroeger/vim-bookmarks'
 "  里面的mapping很有用
 " 还有一些扩展功能，详见extras
 Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
+
 " 用途：查找时 显示 x/y的
 Plug 'osyo-manga/vim-anzu'
 
@@ -810,10 +864,14 @@ Plug 'makerj/vim-pdf'
 "Plug 'xolox/vim-session'
 "Plug 'xolox/vim-misc' " vim-session dep
 
-" Dependencies
+" ################# Dependencies ##################
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'kana/vim-textobj-user'
 Plug 'roxma/nvim-yarp'
+" OmniSharp-vim is a plugin for Vim to provide IDE like abilities for C#.
+Plug 'OmniSharp/omnisharp-vim'
+" 用途：一种fuzzy finder
+Plug 'ctrlpvim/ctrlp.vim' , { 'for': ['cs', 'vim-plug'] } " omnisharp-vim dependency
 
 call plug#end()
 
@@ -878,7 +936,7 @@ autocmd FileType python BracelessEnable +indent +fold +highlight
 " ===
 " fix the most annoying bug that coc has
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter', 'coc-floaterm']
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "nmap <silent> <TAB> <Plug>(coc-range-select)
 "xmap <silent> <TAB> <Plug>(coc-range-select)
@@ -1061,7 +1119,7 @@ nmap mC <Plug>BookmarkClear
 nmap mX <Plug>BookmarkClearAll
 nmap mu <Plug>BookmarkMoveUp
 nmap me <Plug>BookmarkMoveDown
-nmap <Leader>g <Plug>BookmarkMoveToLine
+"nmap <Leader>g <Plug>BookmarkMoveToLine
 let g:bookmark_save_per_working_dir = 1
 let g:bookmark_auto_save = 1
 let g:bookmark_highlight_lines = 1
@@ -1343,7 +1401,7 @@ let g:colorizer_syntax = 1
 " ===
 " === goyo
 " ===
-map <LEADER>gy :Goyo<CR>
+map <LEADER>y :Goyo<CR>
 
 
 " ===
@@ -1406,11 +1464,12 @@ let g:xtabline_settings = {}
 let g:xtabline_settings.enable_mappings = 1
 let g:xtabline_settings.tabline_modes = ['tabs', 'buffers']
 let g:xtabline_settings.last_open_first = 1
-noremap bn :XTabNextBuffer<CR>
-noremap bp :XTabPrevBuffer<CR>
-noremap bq :XTabCloseBuffer<CR>
-noremap to :XTabCycleMode<CR>
-noremap \p :XTabInfo<CR>
+" 不能做如下映射，不然b不能用了
+"noremap bn :XTabNextBuffer<CR>
+"noremap bp :XTabPrevBuffer<CR>
+"noremap bq :XTabCloseBuffer<CR>
+"noremap to :XTabCycleMode<CR>
+"noremap \p :XTabInfo<CR>
 
 
 " ===
@@ -1437,8 +1496,12 @@ noremap \p :XTabInfo<CR>
 "let g:context_add_mappings = 0
 "noremap <leader>ct :ContextToggle<CR>
 
-
 " ===
+" === anyjump
+" ===
+nnoremap <leader>gj :AnyJump<CR>
+
+"===
 " === suda.vim
 " ===
 cnoreabbrev sudowrite w suda://%
