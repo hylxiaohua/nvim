@@ -4,7 +4,7 @@
 "| |  | | | |   | |\  | \ V /  | || |  | |  _ <| |___
 "|_|  |_| |_|   |_| \_|  \_/  |___|_|  |_|_| \_\\____|
 
-" Author: @theniceboy
+" Author: @hylxiaohua
 
 " Checkout-list
 " vim-esearch
@@ -176,8 +176,8 @@ endfunction
 " === Basic Mappings
 " ===
 " Set <LEADER> as <SPACE>, ; as :
-let mapleader=","
-" noremap ; :
+let mapleader=" "
+let maplocalleader=","
 
 " Save & quit
 noremap Q :q<CR>
@@ -190,15 +190,8 @@ noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 " Open Startify
 "noremap <LEADER>st :Startify<CR>
 
-" Undo operations
-" noremap l u
-
-" Insert Key
-" noremap k i
-" noremap K I
-
 " make Y to copy till the end of the line
-nnoremap Y y$
+"nnoremap Y y$
 
 " Copy to system clipboard
 vnoremap Y "+y
@@ -211,14 +204,11 @@ nnoremap > >>
 noremap <LEADER><CR> :nohlsearch<CR>
 
 " Adjacent duplicate words
-noremap <LEADER>dw /\(\<\w\+\>\)\_s*\1
+"noremap <LEADER>dw /\(\<\w\+\>\)\_s*\1
 
 " Space to Tab
-nnoremap <LEADER>tt :%s/    /\t/g
-vnoremap <LEADER>tt :s/    /\t/g
-
-" Folding
-noremap <silent> <LEADER>o za
+"nnoremap <LEADER>tt :%s/    /\t/g
+"vnoremap <LEADER>tt :s/    /\t/g
 
 " Open up lazygit
 noremap \g :term lazygit<CR>
@@ -227,22 +217,6 @@ noremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
 " Open up pudb
 noremap <c-d> :tab sp<CR>:term python3 -m pudb %<CR>
 "noremap <f5> :tab sp<CR>:term python3 -m pudb %<CR>
-
-
-
-" ===
-" === Cursor Movement
-" ===
-" New cursor movement (the default arrow keys are used for resizing windows)
-"     ^
-"     u
-" < n   i >
-"     e
-"     v
-"noremap <silent> u k
-"noremap <silent> n h
-"noremap <silent> e j
-"noremap <silent> i l
 
 " U/E keys for 5 times u/e (faster navigation)
 noremap <silent> K 5k
@@ -253,20 +227,13 @@ noremap <silent> H 0
 " L key: go to the end of the line
 noremap <silent> L $
 
-" Faster in-line navigation
-" noremap W 5w
-" noremap B 5b
-
-" set h (same as n, cursor left) to 'end of word'
-" noremap h e
-
 " Ctrl + U or E will move up/down the view port without moving the cursor
 "noremap <C-U> 5<C-y>
 "noremap <C-E> 5<C-e>
 
 " move with abc_def_gh
-noremap <C-w> f_l
-noremap <C-b> F_;l
+" noremap <C-w> f_l
+" noremap <C-b> F_;l
 
 " ===
 " === Insert Mode Cursor Movement
@@ -292,10 +259,10 @@ cnoremap <M-w> <S-Right>
 " ===
 " Use <space> + new arrow keys for moving the cursor around windows
 " noremap <LEADER>w <C-w>w
-noremap <LEADER>k <C-w>k
-noremap <LEADER>j <C-w>j
-noremap <LEADER>h <C-w>h
-noremap <LEADER>l <C-w>l
+noremap <LOCALLEADER>k <C-w>k
+noremap <LOCALLEADER>j <C-w>j
+noremap <LOCALLEADER>h <C-w>h
+noremap <LOCALLEADER>l <C-w>l
 
 " Disable the default s key
 noremap s <nop>
@@ -313,30 +280,30 @@ noremap <left> :vertical resize-5<CR>
 noremap <right> :vertical resize+5<CR>
 
 " Place the two screens up and down
-noremap sh <C-w>t<C-w>K
+noremap ss <C-w>t<C-w>K
 " Place the two screens side by side
 noremap sv <C-w>t<C-w>H
 
 " Rotate screens
-noremap srh <C-w>b<C-w>K
+noremap srs <C-w>b<C-w>K
 noremap srv <C-w>b<C-w>H
 
 " Press <SPACE> + q to close the window below the current window
 noremap <LEADER>q <C-w>j:q<CR>
 
-
 " ===
 " === Tab management
 " ===
 " Create a new tab with tu
-noremap tn :tabe<CR>
+noremap tt :tabe<CR>
 " Move around tabs with tn and ti
-noremap th :-tabnext<CR>
-noremap tl :+tabnext<CR>
+noremap tp :-tabnext<CR>
+noremap tn :+tabnext<CR>
+noremap tf :tabfirst<CR>
+noremap tl :tablast<CR>
 " Move the tabs with tmn and tmi
 noremap tmh :-tabmove<CR>
 noremap tml :+tabmove<CR>
-
 
 " ===
 " === Markdown Settings
@@ -351,22 +318,14 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 " === Other useful stuff
 " ===
 " Open a new instance of st with the cwd
-nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
-
-" Move the next character to the end of the line with ctrl+9
-" inoremap <C-u> <ESC>lx$p
+"nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
 
 " Opening a terminal window
-noremap <space>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
+noremap <localleader>sl :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
+noremap <localleader>sj :set splitright<CR>:vsplit<CR>:res +10<CR>:term<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
 " noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
-
-" Spelling Check with <space>sc
-noremap <LEADER>sc :set spell!<CR>
-
-" Press ` to change case (instead of ~)
-" noremap ` ~
 
 noremap <C-c> zz
 
@@ -380,7 +339,7 @@ noremap <LEADER>- :lN<CR>
 noremap <LEADER>= :lne<CR>
 
 " find and replace
-noremap \s :%s//g<left><left>
+noremap \s :%s///g<left><left><left>
 
 " Compile function
 noremap rr :call CompileRunGcc()<CR>
@@ -429,8 +388,18 @@ call plug#begin('~/.config/nvim/plugged')
 
 " dark是一种语言，flutter是框架
 "Plug 'tiagofumo/dart-vim-flutter-layout'
-"
+
+" 用途: 浮动窗口终端
+" FloaterNew/toggle/prev/next/
+" msend--发送指定行到teminal
+" 可以设置term的位置、透明度、边框
+" 打开时term所在的目录
+" 如果在term中打开一个文件，会在vim中以split vsp等打开
+" 还有个floatsend的很有用
+" 可以通过coclist切换floaterm的buffer
+" fzf不能用，没找到原因
 Plug 'voldikss/vim-floaterm'
+
 " 用途：
 " 可以高亮当前光标下的变量
 " 可配置的地方如下：
@@ -473,38 +442,7 @@ Plug 'RRethy/vim-illuminate'
 " 就是针对以上功能的开闭，显示的样式，还有查找器(ag,rg)等
 Plug 'pechorin/any-jump.vim'
 
-"Plug 'liuchengxu/vim-which-key' , { 'on': ['WhichKey', 'WhichKey!'] }
 Plug 'liuchengxu/vim-which-key'
-let g:mapleader = ','
-let g:maplocalleader = "\<Space>"
-" By default timeoutlen is 1000 ms
-set timeout
-set timeoutlen=500
-let g:which_key_map = {}
-let g:which_key_map['name'] = "neovim root by hyl"
-let g:which_key_map['h'] = "window-left"
-let g:which_key_map['j'] = "window-down"
-let g:which_key_map['k'] = "window-up"
-let g:which_key_map['l'] = "window-right"
-
-nnoremap <silent> <leader>oq  :copen<CR>
-nnoremap <silent> <leader>ol  :lopen<CR>
-let g:which_key_map.c = {'name' : 'comment'}
-let g:which_key_map.g = {'name' : 'git'}
-let g:which_key_map.b = {
-      \ 'name' : '+buffer' ,
-      \ 'd' : ['bd'        , 'delete-buffer']   ,
-      \ 'f' : ['bfirst'    , 'first-buffer']    ,
-      \ 'l' : ['blast'     , 'last-buffer']     ,
-      \ 'n' : ['bnext'     , 'next-buffer']     ,
-      \ 'p' : ['bprevious' , 'previous-buffer'] ,
-      \ '?' : ['Buffers'   , 'fzf-buffer']      ,
-      \ }
-
-autocmd VimEnter * call which_key#register(',', "g:which_key_map")
-nnoremap <silent> <leader> :WhichKey ','<CR>
-vnoremap <silent> <leader> :WhichKeyVisual ','<CR>
-
 
 " ################### 美化 ######################
 
@@ -626,16 +564,16 @@ Plug 'lervag/vimtex'
 
 
 " ############### 语言相关 #####################
-Plug 'elzr/vim-json'
-Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
-Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-"Plug 'jaxbot/browserlink.vim'
-Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
-Plug 'keith/swift.vim'
+"Plug 'elzr/vim-json'
+"Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+"Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
+"Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+"Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+"Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+"Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+""Plug 'jaxbot/browserlink.vim'
+"Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
+"Plug 'keith/swift.vim'
 
 " ################ Python ################
 " 用途：折叠代码用的，只提供了折叠import，和注释的功能，
@@ -694,7 +632,7 @@ Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown'] }
 Plug 'theniceboy/bullets.vim'
 
 " ################## Other filetypes ###################
-Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
+"Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
 
 " ################# Editor Enhancement ################
 
@@ -766,7 +704,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'Konfekt/FastFold'
 
 " 用途：去除行尾空格
-Plug 'bronson/vim-trailing-whitespace'
+"Plug 'bronson/vim-trailing-whitespace'
 " 用途：显示寄存器的值
 " "触发
 Plug 'junegunn/vim-peekaboo'
@@ -829,7 +767,6 @@ Plug 'osyo-manga/vim-anzu'
 "Plug 'KabbAmine/zeavim.vim' " <LEADER>z to find doc
 
 " Mini Vim-APP
-"Plug 'voldikss/vim-floaterm'
 "Plug 'liuchengxu/vim-clap'
 "Plug 'jceb/vim-orgmode'
 "Plug 'mhinz/vim-startify'
@@ -920,7 +857,7 @@ let g:gitgutter_preview_win_floating = 1
 "let g:gitgutter_use_location_list = 1
 autocmd BufWritePost * GitGutter
 nnoremap <LEADER>gf :GitGutterFold<CR>
-nnoremap H :GitGutterPreviewHunk<CR>
+nnoremap <LEADER>gp :GitGutterPreviewHunk<CR>
 nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
 nnoremap <LEADER>g+ :GitGutterNextHunk<CR>
 
@@ -936,7 +873,8 @@ autocmd FileType python BracelessEnable +indent +fold +highlight
 " ===
 " fix the most annoying bug that coc has
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter', 'coc-floaterm']
+"let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter', 'coc-floaterm']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-floaterm']
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "nmap <silent> <TAB> <Plug>(coc-range-select)
 "xmap <silent> <TAB> <Plug>(coc-range-select)
@@ -993,7 +931,7 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 "" Use <C-j> for both expand and jump (make expand higher priority.)
 "imap <C-j> <Plug>(coc-snippets-expand-jump)
 "修复enter不能选中coc-snippet的问题
-"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
 " ===
 " === MarkdownPreview
@@ -1026,8 +964,12 @@ let g:mkdp_page_title = '「${name}」'
 " ===
 noremap <LEADER>tm :TableModeToggle<CR>
 "let g:table_mode_disable_mappings = 1
+let g:table_mode_map_prefix = '<Leader>t'
 let g:table_mode_cell_text_object_i_map = 'k<Bar>'
-
+"noremap <leader>th [\|
+"noremap <leader>tl ]\|
+"noremap <leader>tk {\|
+"noremap <leader>tj }\|
 
 " ===
 " === FZF
@@ -1256,8 +1198,6 @@ let g:vimtex_view_general_viewer = 'llpp'
 let g:vimtex_mappings_enabled = 0
 let g:vimtex_text_obj_enabled = 0
 let g:vimtex_motion_enabled = 0
-let maplocalleader=' '
-
 
 " ===
 " === vim-calendar
@@ -1441,7 +1381,7 @@ nmap ga <Plug>(EasyAlign)
 " === trailingwhitespace
 " ===
 "trailingwhitespace {{{
-    map <leader><space> :FixWhitespace<cr>
+    "map <leader><space> :FixWhitespace<cr>
 "}}}
 
 
@@ -1499,7 +1439,7 @@ let g:xtabline_settings.last_open_first = 1
 " ===
 " === anyjump
 " ===
-nnoremap <leader>gj :AnyJump<CR>
+"nnoremap <leader>gj :AnyJump<CR>
 
 "===
 " === suda.vim
@@ -1563,8 +1503,8 @@ let g:rnvimr_presets = [{'width': 0.7, 'height': 0.7}]
 " ===
 " === vim-subversive
 " ===
-nmap s <plug>(SubversiveSubstitute)
-nmap ss <plug>(SubversiveSubstituteLine)
+"nmap s <plug>(SubversiveSubstitute)
+"nmap ss <plug>(SubversiveSubstituteLine)
 
 
 " ===
@@ -1577,6 +1517,77 @@ hi illuminatedWord cterm=undercurl gui=undercurl
 " === rainbow
 " ===
 let g:rainbow_active = 1
+
+" ===
+" === floaterm
+" ===
+let g:floaterm_keymap_new    = '<localleader>tn'
+let g:floaterm_keymap_prev   = '<localleader>th'
+let g:floaterm_keymap_next   = '<localleader>tl'
+let g:floaterm_keymap_toggle = '<localleader>tt'
+let g:floaterm_width = 0.8
+let g:floaterm_winblend = 1
+let g:floatern_position = 'center'
+" ===
+" === which key
+" ===
+let g:mapleader = " "
+let g:maplocalleader = ","
+" By default timeoutlen is 1000 ms
+set timeout
+set timeoutlen=500
+let g:leader_map = {}
+let g:localleader_map = {}
+let g:tab_map = {
+			\ 'name' : 'tab management' ,
+			\ 'p' : 'previous tab' ,
+			\ 'n' : 'next tab' ,
+			\ 't' : 'new tab' ,
+			\ 'f' : 'first tab' ,
+			\ 'l' : 'last tab' ,
+			\ '1' : ['1gt' , 'tab 1']   ,
+			\ '2' : ['2gt' , 'tab 2']   ,
+			\ '3' : ['3gt' , 'tab 3']   ,
+			\ 'm' : { 'name' : 'move' },
+			\}
+let g:split_map = {
+			\ 'name' : 'split window key' ,
+			\ 'h' : 'vsplit window and put cursor left' ,
+			\ 'l' : 'vsplit window and put cursor right' ,
+			\ 'j' : 'split window and put cursor bottom' ,
+			\ 'k' : 'split window and put cursor up' ,
+			\ 's' : 'change vsp to sp' ,
+			\ 'v' : 'change sp to vsp' ,
+			\ 'r' : { 'name' : 'rotate' },
+			\}
+let g:localleader_map['name'] = "neovim localleader key by hyl"
+let g:leader_map['name'] = "neovim leader key by hyl"
+
+let g:leader_map[' ']= { 'name' : 'easymotion' }
+let g:leader_map['g'] = {'name' : 'git'}
+let g:leader_map['c'] = {'name' : 'comment'}
+let g:leader_map['t'] = {'name' : 'table mode'}
+
+let g:leader_map.b = {
+			\ 'name' : 'buffer' ,
+			\ 'd' : ['bd'        , 'delete-buffer']   ,
+			\ 'f' : ['bfirst'    , 'first-buffer']    ,
+			\ 'l' : ['blast'     , 'last-buffer']     ,
+			\ 'n' : ['bnext'     , 'next-buffer']     ,
+			\ 'p' : ['bprevious' , 'previous-buffer'] ,
+			\ '?' : ['Buffers'   , 'fzf-buffer']      ,
+			\ }
+
+autocmd VimEnter * call which_key#register(' ', "g:leader_map")
+autocmd VimEnter * call which_key#register(',', "g:localleader_map")
+autocmd VimEnter * call which_key#register('s', "g:split_map")
+autocmd VimEnter * call which_key#register('t', "g:tab_map")
+nnoremap <silent> s :WhichKey 's'<CR>
+nnoremap <silent> t :WhichKey 't'<CR>
+nnoremap <silent> <leader> :WhichKey ' '<CR>
+vnoremap <silent> <leader> :WhichKeyVisual ' '<CR>
+nnoremap <silent> <localleader> :WhichKey ','<CR>
+vnoremap <silent> <localleader> :WhichKeyVisual ','<CR>
 
 " ===================== End of Plugin Settings =====================
 
