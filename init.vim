@@ -882,12 +882,12 @@ function! s:check_back_space() abort
 	let col = col('.') - 1
 	return !col || getline('.')[col - 1]	=~ '\s'
 endfunction
-inoremap <silent><expr> <Tab>
+inoremap <silent><expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<Tab>" :
 			\ coc#refresh()
 " shift+tab代替up
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 " #代表匹配大小写
 function! s:check_back_space() abort
 	let col = col('.') - 1
@@ -929,8 +929,10 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 "let g:coc_snippet_prev = '<c-k>'
 "" Use <C-j> for both expand and jump (make expand higher priority.)
 "imap <C-j> <Plug>(coc-snippets-expand-jump)
+
 "修复enter不能选中coc-snippet的问题
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"  "效果同上
 
 " ===
 " === MarkdownPreview
@@ -978,7 +980,7 @@ set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 noremap <C-p> :FZF<CR>
 noremap <C-f> :Ag<CR>
 noremap <C-h> :MRU<CR>
-noremap <C-t> :BTags<CR>
+"noremap <C-t> :BTags<CR>
 noremap <C-l> :LinesWithPreview<CR>
 "noremap <C-w> :Buffers<CR>
 "noremap ; :History:<CR>
@@ -1130,6 +1132,9 @@ let g:bullets_enabled_file_types = [
 " === Vista.vim
 " ===
 noremap <silent> T :Vista!!<CR>
+noremap <silent> T :Vista!! coc<CR>
+"noremap <silent> <c-t> :Vista finder<CR>
+noremap <c-t> :silent! Vista finder coc<CR>
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'ctags'
 let g:vista_fzf_preview = ['right:50%']
