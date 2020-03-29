@@ -32,7 +32,6 @@ if empty(glob('~/.config/nvim/_machine_specific.vim'))
 endif
 source ~/.config/nvim/_machine_specific.vim
 
-
 " ====================
 " === Editor Setup ===
 " ====================
@@ -42,7 +41,6 @@ source ~/.config/nvim/_machine_specific.vim
 " set clipboard=unnamedplus
 let &t_ut=''
 set autochdir
-
 
 " ===
 " === Editor behavior
@@ -99,7 +97,6 @@ set virtualedit=block
 nnoremap <F4> :set wrap! wrap?<CR>
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
 
 " ===
 " === Terminal Behaviors
@@ -321,8 +318,8 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 "nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
 
 " Opening a terminal window
-noremap <localleader>sl :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
-noremap <localleader>sj :set splitright<CR>:vsplit<CR>:res +10<CR>:term<CR>
+noremap <localleader>tl :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
+noremap <localleader>tj :set splitright<CR>:vsplit<CR>:res +10<CR>:term<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
 " noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
@@ -564,7 +561,7 @@ Plug 'lervag/vimtex'
 
 
 " ############### 语言相关 #####################
-"Plug 'elzr/vim-json'
+Plug 'elzr/vim-json'
 "Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 "Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 "Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
@@ -836,6 +833,8 @@ color gruvbox
 "color ayu
 "set background=light
 "color xcodedark
+"color xcodelighthc
+set cursorcolumn
 
 hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
@@ -895,26 +894,26 @@ function! s:check_back_space() abort
 	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 " c-space触发补全
-inoremap <silent><expr> <c-space> coc#refresh()
+"inoremap <silent><expr> <c-space> coc#refresh()
 
 " Open up coc-commands
-nnoremap <c-c> :CocCommand<CR>
-" Text Objects
-xmap kf <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap kf <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
+nnoremap <localleader>cc :CocCommand<CR>
+" Text Objects   没反应，一点都没
+"xmap kf <Plug>(coc-funcobj-i)
+"xmap af <Plug>(coc-funcobj-a)
+"omap kf <Plug>(coc-funcobj-i)
+"omap af <Plug>(coc-funcobj-a)
 " Useful commands
-nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <leader>rn <Plug>(coc-rename)
-nmap tt :CocCommand explorer<CR>
+nmap <leader>rn <Plug>(coc-rename) "只能替换一个单词
+nmap <localleader>ce :CocCommand explorer<CR>
 " coc-translator
-nmap ts <Plug>(coc-translator-p)
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+nmap <localleader>ct <Plug>(coc-translator-p)
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph 
+" 完全没啥用
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 
@@ -1089,36 +1088,21 @@ function g:Undotree_CustomMap()
 	nmap <buffer> K 5<plug>UndotreePreviousState
 endfunc
 
-
-" ==
-" == vim-multiple-cursor
-" ==
-"let g:multi_cursor_use_default_mapping = 0
-"let g:multi_cursor_start_word_key = '<c-k>'
-"let g:multi_cursor_select_all_word_key = '<a-k>'
-"let g:multi_cursor_start_key = 'g<c-k>'
-"let g:multi_cursor_select_all_key = 'g<a-k>'
-"let g:multi_cursor_next_key = '<c-k>'
-"let g:multi_cursor_prev_key = '<c-p>'
-"let g:multi_cursor_skip_key = '<C-s>'
-"let g:multi_cursor_quit_key = '<Esc>'
-
-
 " ===
 " === vim-visual-multi
 " ===
 "let g:VM_theme             = 'iceblue'
 "let g:VM_default_mappings = 0
 let g:VM_leader = {'default': ',', 'visual': ',', 'buffer': ','}
-let g:VM_maps = {}
-let g:VM_maps['Find Under']         = '<C-k>'
-let g:VM_maps['Find Subword Under'] = '<C-k>'
-let g:VM_maps['Find Next']         = ''
-let g:VM_maps['Find Prev']         = ''
-let g:VM_maps['Remove Region'] = 'q'
-let g:VM_maps['Skip Region'] = ''
-let g:VM_maps["Undo"]      = 'l'
-let g:VM_maps["Redo"]      = '<C-r>'
+"let g:VM_maps = {}
+"let g:VM_maps['Find Under']         = '<C-k>'
+"let g:VM_maps['Find Subword Under'] = '<C-k>'
+"let g:VM_maps['Find Next']         = ''
+"let g:VM_maps['Find Prev']         = ''
+"let g:VM_maps['Remove Region'] = 'q'
+"let g:VM_maps['Skip Region'] = ''
+"let g:VM_maps["Undo"]      = 'l'
+"let g:VM_maps["Redo"]      = '<C-r>'
 
 
 " ===
@@ -1129,17 +1113,6 @@ noremap <LEADER>f :F  **/*<left><left><left><left><left>
 let g:far#mapping = {
 		\ "replace_undo" : ["l"],
 		\ }
-
-
-" ===
-" === vim-calc
-" ===
-"noremap <LEADER>a :call Calc()<CR>
-" Testing
-"if !empty(glob('~/Github/vim-calc/vim-calc.vim'))
-"source ~/Github/vim-calc/vim-calc.vim
-"endif
-
 
 " ===
 " === Bullets.vim
@@ -1353,22 +1326,22 @@ let g:vim_jsx_pretty_colorful_config = 1
 " ===
 " === fastfold
 " ===
-nmap zuz <Plug>(FastFoldUpdate)
-let g:fastfold_savehook = 1
-let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
-let g:fastfold_fold_movement_commands = [']z', '[z', 'ze', 'zu']
-let g:markdown_folding = 1
-let g:tex_fold_enabled = 1
-let g:vimsyn_folding = 'af'
-let g:xml_syntax_folding = 1
-let g:javaScript_fold = 1
-let g:sh_fold_enabled= 7
-let g:ruby_fold = 1
-let g:perl_fold = 1
-let g:perl_fold_blocks = 1
-let g:r_syntax_folding = 1
-let g:rust_fold = 1
-let g:php_folding = 1
+"nmap zuz <Plug>(FastFoldUpdate)
+"let g:fastfold_savehook = 1
+"let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+"let g:fastfold_fold_movement_commands = [']z', '[z', 'ze', 'zu']
+"let g:markdown_folding = 1
+"let g:tex_fold_enabled = 1
+"let g:vimsyn_folding = 'af'
+"let g:xml_syntax_folding = 1
+"let g:javaScript_fold = 1
+"let g:sh_fold_enabled= 7
+"let g:ruby_fold = 1
+"let g:perl_fold = 1
+"let g:perl_fold_blocks = 1
+"let g:r_syntax_folding = 1
+"let g:rust_fold = 1
+"let g:php_folding = 1
 
 
 " ===
@@ -1439,7 +1412,12 @@ let g:xtabline_settings.last_open_first = 1
 " ===
 " === anyjump
 " ===
-"nnoremap <leader>gj :AnyJump<CR>
+let g:any_jump_disable_default_keybindings = 1
+nnoremap <leader>jj :AnyJump<CR>
+xnoremap <leader>jj :AnyJump<CR>
+" 可来回切换
+nnoremap <leader>jb :AnyJumpBack<CR>
+nnoremap <leader>jl :AnyJumpLastResults<CR>
 
 "===
 " === suda.vim
@@ -1503,9 +1481,8 @@ let g:rnvimr_presets = [{'width': 0.7, 'height': 0.7}]
 " ===
 " === vim-subversive
 " ===
-"nmap s <plug>(SubversiveSubstitute)
-"nmap ss <plug>(SubversiveSubstituteLine)
-
+nmap <localleader>ss <plug>(SubversiveSubstitute)
+nmap <localleader>sl <plug>(SubversiveSubstituteLine)
 
 " ===
 " === vim-illuminate
@@ -1521,9 +1498,9 @@ let g:rainbow_active = 1
 " ===
 " === floaterm
 " ===
-let g:floaterm_keymap_new    = '<localleader>tn'
-let g:floaterm_keymap_prev   = '<localleader>th'
-let g:floaterm_keymap_next   = '<localleader>tl'
+let g:floaterm_keymap_new    = '<localleader>tc'
+let g:floaterm_keymap_prev   = '<localleader>tp'
+let g:floaterm_keymap_next   = '<localleader>tn'
 let g:floaterm_keymap_toggle = '<localleader>tt'
 let g:floaterm_width = 0.8
 let g:floaterm_winblend = 1
