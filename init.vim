@@ -452,14 +452,14 @@ Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '|'
 
 " ################### 颜色主题 ######################
-"Plug 'liuchengxu/space-vim-theme'
+Plug 'liuchengxu/space-vim-theme'
 Plug 'morhetz/gruvbox'
 "Plug 'ayu-theme/ayu-vim'
 "Plug 'rakr/vim-one'
 "Plug 'mhartington/oceanic-next'
 "Plug 'kristijanhusak/vim-hybrid-material'
-"Plug 'ajmwagar/vim-deus'
-"Plug 'arzg/vim-colors-xcode'
+Plug 'ajmwagar/vim-deus'
+Plug 'arzg/vim-colors-xcode'
 
 " ################### 高亮 ######################
 
@@ -828,12 +828,13 @@ set background=dark
 "color dracula
 "color one
 "color deus
-color gruvbox
+"color gruvbox
 "let ayucolor="light"
 "color ayu
 "set background=light
 "color xcodedark
 "color xcodelighthc
+colorscheme space_vim_theme
 set cursorcolumn
 
 hi NonText ctermfg=gray guifg=grey10
@@ -1132,7 +1133,7 @@ let g:bullets_enabled_file_types = [
 " === Vista.vim
 " ===
 noremap <silent> T :Vista!!<CR>
-noremap <silent> T :Vista!! coc<CR>
+"noremap <silent> T :Vista!! coc<CR>
 "noremap <silent> <c-t> :Vista finder<CR>
 noremap <c-t> :silent! Vista finder coc<CR>
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
@@ -1423,6 +1424,7 @@ xnoremap <leader>jj :AnyJump<CR>
 " 可来回切换
 nnoremap <leader>jb :AnyJumpBack<CR>
 nnoremap <leader>jl :AnyJumpLastResults<CR>
+let g:any_jump_search_prefered_engine = 'rg'
 
 "===
 " === suda.vim
