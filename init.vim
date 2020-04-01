@@ -519,6 +519,7 @@ Plug 'wellle/tmux-complete.vim'
 " ############## Snippets #################
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+"Plug 'theniceboy/vim-snippets'
 
 " ############# Undo Tree ##################
 " 用途：临时恢复文件，救命用的
@@ -875,7 +876,7 @@ autocmd FileType python BracelessEnable +indent +fold +highlight
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 "let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter', 'coc-floaterm']
 "coc-clangd需要在Lsp的配置文件中去掉clangd,但自己编译的llvm7的clangd经常会断开，暂时未找到解决方案。
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-floaterm', 'coc-snippets', 'coc-clangd']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-floaterm', 'coc-snippets', 'coc-todolist']
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "nmap <silent> <TAB> <Plug>(coc-range-select)
 "xmap <silent> <TAB> <Plug>(coc-range-select)
@@ -918,6 +919,10 @@ nmap <localleader>ct <Plug>(coc-translator-p)
 " 完全没啥用
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
+" coctodolist
+nnoremap <leader>cn :CocCommand todolist.create<CR>
+nnoremap <leader>cl :CocList todolist<CR>
+nnoremap <leader>cu :CocCommand todolist.download<CR>:CocCommand todolist.upload<CR>
 
 " 在工作环境中，遇到了snippets不能tab补全和<c-j>失效的问题,开启下面即可。
 "let g:coc_snippet_next = '<tab>'
