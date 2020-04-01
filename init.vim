@@ -1058,8 +1058,8 @@ let g:bookmark_no_default_key_mappings = 1
 nmap mt <Plug>BookmarkToggle
 nmap ma <Plug>BookmarkAnnotate
 nmap ml <Plug>BookmarkShowAll
-nmap mi <Plug>BookmarkNext
-nmap mn <Plug>BookmarkPrev
+nmap mn <Plug>BookmarkNext
+nmap mp <Plug>BookmarkPrev
 nmap mC <Plug>BookmarkClear
 nmap mX <Plug>BookmarkClearAll
 nmap mu <Plug>BookmarkMoveUp
@@ -1523,6 +1523,7 @@ set timeout
 set timeoutlen=500
 let g:leader_map = {}
 let g:localleader_map = {}
+let g:mark_map = {'name' : 'mark or bookmark'}
 let g:tab_map = {
 			\ 'name' : 'tab management' ,
 			\ 'p' : 'previous tab' ,
@@ -1567,8 +1568,10 @@ autocmd VimEnter * call which_key#register(' ', "g:leader_map")
 autocmd VimEnter * call which_key#register(',', "g:localleader_map")
 autocmd VimEnter * call which_key#register('s', "g:split_map")
 autocmd VimEnter * call which_key#register('t', "g:tab_map")
+autocmd VimEnter * call which_key#register('m', "g:mark_map")
 nnoremap <silent> s :WhichKey 's'<CR>
 nnoremap <silent> t :WhichKey 't'<CR>
+nnoremap <silent> m :WhichKey 'm'<CR>
 nnoremap <silent> <leader> :WhichKey ' '<CR>
 vnoremap <silent> <leader> :WhichKeyVisual ' '<CR>
 nnoremap <silent> <localleader> :WhichKey ','<CR>
