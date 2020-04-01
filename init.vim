@@ -870,6 +870,13 @@ autocmd FileType python BracelessEnable +indent +fold +highlight
 
 
 " ===
+" === vim-fugitive
+" ===
+" 每一行的最新改动
+nnoremap gb :Gblame<CR>
+
+
+" ===
 " === coc
 " ===
 " fix the most annoying bug that coc has
