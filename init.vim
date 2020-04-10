@@ -441,6 +441,14 @@ Plug 'pechorin/any-jump.vim'
 
 Plug 'liuchengxu/vim-which-key'
 
+" 用途：一种高亮配色,没啥反应
+Plug 'norcalli/nvim-colorizer.lua'
+" 用途：更改project的根目录
+Plug 'airblade/vim-rooter'
+" 用途：异步执行任务
+Plug 'skywind3000/asynctasks.vim'
+Plug 'skywind3000/asyncrun.vim'
+
 " ################### 美化 ######################
 
 " 用途：最底下的状态栏，支持coc vista等
@@ -883,7 +891,7 @@ nnoremap gb :Gblame<CR>
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 "let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter', 'coc-floaterm']
 "coc-clangd需要在Lsp的配置文件中去掉clangd,但自己编译的llvm7的clangd经常会断开，暂时未找到解决方案。
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-floaterm', 'coc-snippets', 'coc-todolist']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-floaterm', 'coc-snippets', 'coc-todolist', 'coc-tasks']
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "nmap <silent> <TAB> <Plug>(coc-range-select)
 "xmap <silent> <TAB> <Plug>(coc-range-select)
@@ -1460,6 +1468,23 @@ nmap <localleader>sl <plug>(SubversiveSubstituteLine)
 " ===
 let g:Illuminate_delay = 750
 hi illuminatedWord cterm=undercurl gui=undercurl
+
+" ===
+" === nvim-colorizer.lua
+" ===
+lua require'colorizer'.setup()
+
+
+" ===
+" === vim-rooter
+" ===
+let g:rooter_patterns = ['__vim_project_root', '.git/']
+
+
+" ===
+" === AsyncTasks
+" ===
+let g:asyncrun_open = 6
 
 " ===
 " === rainbow
