@@ -1122,7 +1122,6 @@ noremap <LEADER>gi :FzfGitignore<CR>
 " ===
 " === Ultisnips
 " ===
-let g:tex_flavor = "latex"
 inoremap <c-n> <nop>
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-e>"
@@ -1130,15 +1129,18 @@ let g:UltiSnipsJumpBackwardTrigger="<c-n>"
 let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/UltiSnips/', 'UltiSnips']
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
 
-
 " ===
 " === vimtex
 " ===
 "let g:vimtex_view_method = ''
+let g:tex_flavor = "latex"
 let g:vimtex_view_general_viewer = 'llpp'
 let g:vimtex_mappings_enabled = 0
 let g:vimtex_text_obj_enabled = 0
 let g:vimtex_motion_enabled = 0
+let g:vimtex_quickfix_mode = 1
+set conceallevel=1
+let g:tex_conceal = 'abdmg'
 
 " ===
 " === vim-calendar
