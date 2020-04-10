@@ -1011,6 +1011,24 @@ autocmd  FileType fzf set laststatus=0 noruler
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
   \| autocmd BufLeave <buffer> set laststatus=2 ruler 
 
+function! s:list_buffers()
+	redir => list
+	silent ls
+	redir END
+	return split(list, "\n")
+endfunction
+
+function! s:delete_buffers(lines)
+	execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+endfunction
+
+command! BD call fzf#run(fzf#wrap({
+	\ 'source': s:list_buffers(),
+	\ 'sink*': { lines -> s:delete_buffers(lines) },
+	\ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+\ }))
+
+noremap <c-d> :BD<CR>
 
 " ===
 " === CTRLP (Dependency for omnisharp)
