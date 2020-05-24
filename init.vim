@@ -89,7 +89,7 @@ if has('persistent_undo')
 	set undofile
 	set undodir=~/.config/nvim/tmp/undo,.
 endif
-set colorcolumn=80
+set colorcolumn=100
 set updatetime=1000
 set virtualedit=block
 
@@ -573,8 +573,10 @@ Plug 'lervag/vimtex'
 
 " ############### 语言相关 #####################
 Plug 'elzr/vim-json'
-"Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-"Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
+Plug 'othree/html5.vim'
+Plug 'alvan/vim-closetag'
+" Plug 'hail2u/vim-css3-syntax' " , { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+"  Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 "Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 "Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 "Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
@@ -637,7 +639,7 @@ Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown'] }
 " 用途：管理bullet lists(就是md的有序/无序列表)。
 " <c-d> 退回一级缩进
 " <c-t> 增加一级缩进
-Plug 'theniceboy/bullets.vim'
+Plug 'dkarter/bullets.vim'
 
 " ################## Other filetypes ###################
 "Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
@@ -668,8 +670,8 @@ Plug 'mg979/vim-visual-multi'
 "  */
 " <leader-cA> 在行尾添加注释
 " <leader-cl> 左端对齐  cb 两端对齐(/**/)
-
 Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
+Plug 'tomtom/tcomment_vim' " in <space>cn to comment a line
 
 " 用途：true <-> false的转换
 Plug 'theniceboy/antovim' " gs to switch
@@ -689,9 +691,7 @@ Plug 'gcmt/wildfire.vim'
 Plug 'junegunn/vim-after-object'
 
 " 用途：快速对齐
-" gaip= to align the = in paragraph
-" vipga 同上的效果
-Plug 'junegunn/vim-easy-align' 
+Plug 'godlygeek/tabular' " :Tabularize <regex> to align
 
 " 用途：锁定大小写的
 " Plug 'tpope/vim-capslock'	" Ctrl+L (insert) to toggle capslock
@@ -897,7 +897,7 @@ nnoremap gb :Gblame<CR>
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 "let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter', 'coc-floaterm']
 "coc-clangd需要在Lsp的配置文件中去掉clangd,但自己编译的llvm7的clangd经常会断开，暂时未找到解决方案。
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-floaterm', 'coc-snippets', 'coc-todolist', 'coc-tasks', 'coc-actions', 'coc-diagnostic']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-floaterm', 'coc-snippets', 'coc-todolist', 'coc-tasks', 'coc-actions', 'coc-diagnostic', 'coc-prettier']
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "nmap <silent> <TAB> <Plug>(coc-range-select)
 "xmap <silent> <TAB> <Plug>(coc-range-select)
@@ -1092,6 +1092,16 @@ function g:Undotree_CustomMap()
 	nmap <buffer> J 5<plug>UndotreeNextState
 	nmap <buffer> K 5<plug>UndotreePreviousState
 endfunc
+
+" ===
+" === tcomment_vim
+" ===
+nnoremap ci cl
+let g:tcomment_textobject_inlinecomment = ''
+nmap <LEADER>cn g>c
+vmap <LEADER>cn g>
+nmap <LEADER>cu g<c
+vmap <LEADER>cu g<
 
 " ===
 " === vim-visual-multi
@@ -1301,6 +1311,13 @@ endfunction
 " ===
 let g:colorizer_syntax = 1
 
+" ===
+" === vim-easy-align
+" === tabular
+" ===
+" ===
+xmap ga <Plug>(EasyAlign)
+vmap ga :Tabularize /
 
 " ===
 " === vim-easymotion
@@ -1354,11 +1371,6 @@ let g:vim_jsx_pretty_colorful_config = 1
 "let g:php_folding = 1
 
 
-" ===
-" === vim-easy-align
-" ===
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
 
 " ===
 " === trailingwhitespace

@@ -65,8 +65,15 @@
 		"python",
 		"dart"
 	],
+	"yaml.format.enable": true,
 	"signature.target": "float",
 	"yank.enableCompletion" : false,
+	"prettier.eslintIntegration": true,
+	"prettier.disableLanguages": [],
+	"prettier.useTabs": true,
+	"typescript.suggestionActions.enabled": true,
+	"prettier.formatterPriority": 1,
+	"typescript.format.enabled": true,
 	"explorer.width": 38,
 	"explorer.quitOnOpen": true,
 	"explorer.sources": [
