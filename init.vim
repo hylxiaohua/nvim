@@ -445,8 +445,6 @@ Plug 'pechorin/any-jump.vim'
 
 Plug 'liuchengxu/vim-which-key'
 
-" 用途：一种高亮配色,没啥反应
-Plug 'norcalli/nvim-colorizer.lua'
 " 用途：更改project的根目录
 Plug 'airblade/vim-rooter'
 " 用途：异步执行任务
@@ -478,12 +476,11 @@ Plug 'arzg/vim-colors-xcode'
 " 用途：给不同的变量不同的颜色，给力
 " :SemanticHighlightToggle
 Plug 'jaxbot/semantic-highlight.vim'
+" 高亮
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 "说是可以给不同的变量高亮成不同颜色，但试了没啥用。
 "Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
-
-" 没效果，不知道怎么配置，应该是需要lua的。
-"Plug 'norcalli/nvim-colorizer.lua'
 
 " ############## File navigation ##################
 
@@ -1502,12 +1499,6 @@ nmap <localleader>sl <plug>(SubversiveSubstituteLine)
 " ===
 let g:Illuminate_delay = 750
 hi illuminatedWord cterm=undercurl gui=undercurl
-
-" ===
-" === nvim-colorizer.lua
-" ===
-lua require'colorizer'.setup()
-
 
 " ===
 " === vim-rooter
