@@ -450,6 +450,7 @@ Plug 'airblade/vim-rooter'
 " 用途：异步执行任务
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'junkblocker/git-time-lapse'
 
 " ################### 美化 ######################
 
@@ -1505,6 +1506,10 @@ hi illuminatedWord cterm=undercurl gui=undercurl
 " ===
 let g:rooter_patterns = ['__vim_project_root', '.git/']
 
+" ===
+" === AsyncRun
+" ===
+noremap gp :AsyncRun git push<CR>
 
 " ===
 " === AsyncTasks
