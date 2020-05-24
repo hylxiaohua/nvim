@@ -674,7 +674,7 @@ Plug 'mg979/vim-visual-multi'
 Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
 
 " 用途：true <-> false的转换
-Plug 'theniceboy/switch.vim' " gs to switch
+Plug 'theniceboy/antovim' " gs to switch
 
 " 用途：surround.vim
 " cs + xy  : x="" y=''
@@ -726,6 +726,10 @@ Plug 'junegunn/vim-peekaboo'
 " 自定义text object
 " 替换确认
 Plug 'svermeulen/vim-subversive'
+" 快速写参数用的？
+Plug 'theniceboy/argtextobj.vim'
+" f/t{char} 后直接按f/t，代替;
+"Plug 'rhysd/clever-f.vim'
 
 " Input Method Autoswitch
 "Plug 'rlue/vim-barbaric' " slowing down vim-multiple-cursors
