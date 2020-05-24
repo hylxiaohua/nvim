@@ -232,6 +232,10 @@ noremap <silent> L $
 " noremap <C-w> f_l
 " noremap <C-b> F_;l
 
+"意思是gk/j可以在term中移动？
+"noremap <silent> gu gk
+"noremap <silent> ge gj
+
 " ===
 " === Insert Mode Cursor Movement
 " ===
@@ -670,7 +674,7 @@ Plug 'mg979/vim-visual-multi'
 Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
 
 " 用途：true <-> false的转换
-Plug 'AndrewRadev/switch.vim' " gs to switch
+Plug 'theniceboy/switch.vim' " gs to switch
 
 " 用途：surround.vim
 " cs + xy  : x="" y=''
