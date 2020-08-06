@@ -58,6 +58,10 @@
 	"list.previewHighlightGroup": "Statement",
 	"list.nextKeymap": "<C-e>",
 	"list.previousKeymap": "<C-u>",
+	"snippets.ultisnips.directories": [
+		"$HOME/.config/nvim/UltiSnips/",
+		"$HOME/.config/nvim/plugged/vim-snippets/UltiSnips/"
+	],
 	"coc.preferences.formatOnSaveFiletypes": [
 		"javascript",
 		"html",

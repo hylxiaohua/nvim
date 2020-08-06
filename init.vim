@@ -527,7 +527,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'wellle/tmux-complete.vim'
 
 " ############## Snippets #################
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 "Plug 'theniceboy/vim-snippets'
 
@@ -842,14 +842,14 @@ set background=dark
 
 "color dracula
 "color one
-"color deus
+color deus
 "color gruvbox
 "let ayucolor="light"
 "color ayu
 "set background=light
 "color xcodedark
 "color xcodelighthc
-colorscheme space_vim_theme
+"colorscheme space_vim_theme
 set cursorcolumn
 
 hi NonText ctermfg=gray guifg=grey10
@@ -952,19 +952,21 @@ nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<C
 nnoremap <leader>cn :CocCommand todolist.create<CR>
 nnoremap <leader>cl :CocList todolist<CR>
 nnoremap <leader>cu :CocCommand todolist.download<CR>:CocCommand todolist.upload<CR>
+" coc-tasks
+noremap <silent> <leader>ts :CocList tasks<CR>
 
 " 在工作环境中，遇到了snippets不能tab补全和<c-j>失效的问题,开启下面即可。
-"let g:coc_snippet_next = '<tab>'
-"" Use <C-l> for trigger snippet expand.
-"imap <C-l> <Plug>(coc-snippets-expand)
-"" Use <C-j> for select text for visual placeholder of snippet.
-"vmap <C-j> <Plug>(coc-snippets-select)
-"" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-"let g:coc_snippet_next = '<c-j>'
-"" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-"let g:coc_snippet_prev = '<c-k>'
-"" Use <C-j> for both expand and jump (make expand higher priority.)
-"imap <C-j> <Plug>(coc-snippets-expand-jump)
+let g:coc_snippet_next = '<tab>'
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 "修复enter不能选中coc-snippet的问题
 "inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
@@ -1172,12 +1174,12 @@ noremap <LEADER>gi :FzfGitignore<CR>
 " ===
 " === Ultisnips
 " ===
-inoremap <c-n> <nop>
-let g:UltiSnipsExpandTrigger="<c-e>"
-let g:UltiSnipsJumpForwardTrigger="<c-e>"
-let g:UltiSnipsJumpBackwardTrigger="<c-n>"
-let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/UltiSnips/', 'UltiSnips']
-silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
+"inoremap <c-n> <nop>
+"let g:UltiSnipsExpandTrigger="<c-e>"
+"let g:UltiSnipsJumpForwardTrigger="<c-e>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-n>"
+"let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/UltiSnips/', 'UltiSnips']
+"silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
 
 " ===
 " === vimtex
