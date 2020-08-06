@@ -254,6 +254,11 @@ cnoremap <C-f> <Right>
 cnoremap <M-b> <S-Left>
 cnoremap <M-w> <S-Right>
 
+" ===
+" === Searching
+" ===
+noremap - N
+noremap = n
 
 " ===
 " === Window management
@@ -401,14 +406,6 @@ call plug#begin('~/.config/nvim/plugged')
 " fzf不能用，没找到原因
 Plug 'voldikss/vim-floaterm'
 
-" 用途：
-" 可以高亮当前光标下的变量
-" 可配置的地方如下：
-" 1. 触发延迟
-" 2. 样式，默认是高亮,但不明显，可改为下划线
-" 3. 设置文件过滤功能
-" 4. 设置语言过滤功能(比如c的文件名和注释中的同名变量)
-Plug 'RRethy/vim-illuminate'
 
 " 用途：
 " 可以一行拆多行，多行拆一行，对c/python而言，简直是鸡肋。
@@ -427,6 +424,67 @@ Plug 'RRethy/vim-illuminate'
 " 3. 指定外部的颜色拾取器
 "Plug 'KabbAmine/vCoolor.vim'
 
+
+Plug 'liuchengxu/vim-which-key'
+
+" 用途：异步执行任务
+Plug 'skywind3000/asynctasks.vim'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'junkblocker/git-time-lapse'
+Plug 'chrisbra/NrrwRgn'
+
+" ################### 美化 ######################
+
+" 用途：最底下的状态栏，支持coc vista等
+"Plug 'theniceboy/eleline.vim'
+Plug 'liuchengxu/eleline.vim'
+Plug 'bling/vim-bufferline'
+Plug 'Yggdroot/indentLine'
+"let g:indentLine_setColors = 0
+let g:indentLine_char = '|'
+
+" ################### 颜色主题 ######################
+Plug 'liuchengxu/space-vim-theme'
+Plug 'morhetz/gruvbox'
+Plug 'ajmwagar/vim-deus'
+Plug 'arzg/vim-colors-xcode'
+
+" ################### 高亮 ######################
+
+" 用途：给不同的变量不同的颜色，给力
+" :SemanticHighlightToggle
+Plug 'jaxbot/semantic-highlight.vim'
+" 高亮
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+
+"说是可以给不同的变量高亮成不同颜色，但试了没啥用。
+"Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
+
+" 用途：
+" 可以高亮当前光标下的变量
+" 可配置的地方如下：
+" 1. 触发延迟
+" 2. 样式，默认是高亮,但不明显，可改为下划线
+" 3. 设置文件过滤功能
+" 4. 设置语言过滤功能(比如c的文件名和注释中的同名变量)
+Plug 'RRethy/vim-illuminate'
+
+" ############## File navigation ##################
+
+"" 用途：tags ag的可视化，但没有这个，:FZF也可以用
+Plug 'junegunn/fzf.vim'
+"Plug 'yuki-ycino/fzf-preview.vim'
+" 离线安装
+"Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+" 在线安装,manjaro上直接pacman即可，因此注释
+"Plug 'junegunn/fzf'
+
+" 用途：ranger浮动窗口
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+
+" 用途：更改project的根目录
+Plug 'airblade/vim-rooter'
+
 " 用途：一个跳转工具，简直碉堡。
 " AnyJump：会查找当前光标下的单词的定义和引用，以一个浮动窗口的形式体现
 " AnyJumpVisual：同上，在visual模式下使用
@@ -442,59 +500,6 @@ Plug 'RRethy/vim-illuminate'
 " 配置：
 " 就是针对以上功能的开闭，显示的样式，还有查找器(ag,rg)等
 Plug 'pechorin/any-jump.vim'
-
-Plug 'liuchengxu/vim-which-key'
-
-" 用途：更改project的根目录
-Plug 'airblade/vim-rooter'
-" 用途：异步执行任务
-Plug 'skywind3000/asynctasks.vim'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'junkblocker/git-time-lapse'
-
-" ################### 美化 ######################
-
-" 用途：最底下的状态栏，支持coc vista等
-"Plug 'theniceboy/eleline.vim'
-Plug 'liuchengxu/eleline.vim'
-Plug 'bling/vim-bufferline'
-Plug 'Yggdroot/indentLine'
-"let g:indentLine_setColors = 0
-let g:indentLine_char = '|'
-
-" ################### 颜色主题 ######################
-Plug 'liuchengxu/space-vim-theme'
-Plug 'morhetz/gruvbox'
-"Plug 'ayu-theme/ayu-vim'
-"Plug 'rakr/vim-one'
-"Plug 'mhartington/oceanic-next'
-"Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'ajmwagar/vim-deus'
-Plug 'arzg/vim-colors-xcode'
-
-" ################### 高亮 ######################
-
-" 用途：给不同的变量不同的颜色，给力
-" :SemanticHighlightToggle
-Plug 'jaxbot/semantic-highlight.vim'
-" 高亮
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-
-"说是可以给不同的变量高亮成不同颜色，但试了没啥用。
-"Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
-
-" ############## File navigation ##################
-
-"" 用途：tags ag的可视化，但没有这个，:FZF也可以用
-Plug 'junegunn/fzf.vim'
-"Plug 'yuki-ycino/fzf-preview.vim'
-" 离线安装
-"Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
-" 在线安装,manjaro上直接pacman即可，因此注释
-"Plug 'junegunn/fzf'
-
-" 用途：ranger浮动窗口
-Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
 " ############## Tag ##################
 " 用途:tag列表
@@ -621,7 +626,7 @@ Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-p
 "	highlight：缩进的高亮
 "	自动缩进
 "	easymotion
-Plug 'tweekmonster/braceless.vim'
+Plug 'tweekmonster/braceless.vim', { 'for' :['python', 'vim-plug'] }
 
 " #################### Flutter ######################
 "Plug 'dart-lang/dart-vim-plugin'
@@ -630,11 +635,10 @@ Plug 'tweekmonster/braceless.vim'
 " ################# Markdown ##################
 "Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-
-Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
+Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
 
 "根据markdown的标题，生成目录用的
-Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown'] }
+Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown', 'vim-plug'] }
 
 " 用途：管理bullet lists(就是md的有序/无序列表)。
 " <c-d> 退回一级缩进
@@ -691,7 +695,7 @@ Plug 'gcmt/wildfire.vim'
 Plug 'junegunn/vim-after-object'
 
 " 用途：快速对齐
-Plug 'godlygeek/tabular' " :Tabularize <regex> to align
+Plug 'godlygeek/tabular' " ga or :Tabularize <regex> to align
 
 " 用途：锁定大小写的
 " Plug 'tpope/vim-capslock'	" Ctrl+L (insert) to toggle capslock
@@ -1158,11 +1162,11 @@ let g:vista#renderer#icons = {
 \   "function": "\uf794",
 \   "variable": "\uf71b",
 \  }
-function! NearestMethodOrFunction() abort
-	return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-set statusline+=%{NearestMethodOrFunction()}
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+"function! NearestMethodOrFunction() abort
+"  return get(b:, 'vista_nearest_method_or_function', '')
+"endfunction
+"set statusline+=%{NearestMethodOrFunction()}
+"autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 
 " ===
@@ -1442,6 +1446,8 @@ xnoremap <leader>jj :AnyJump<CR>
 " 可来回切换
 nnoremap <leader>jb :AnyJumpBack<CR>
 nnoremap <leader>jl :AnyJumpLastResults<CR>
+let g:any_jump_window_width_ratio  = 0.8
+let g:any_jump_window_height_ratio = 0.9
 let g:any_jump_search_prefered_engine = 'rg'
 
 "===
@@ -1545,6 +1551,15 @@ let g:floaterm_keymap_toggle = '<localleader>tt'
 let g:floaterm_width = 0.8
 let g:floaterm_winblend = 1
 let g:floatern_position = 'center'
+
+" ===
+" === NrrwRgn
+" ===
+let g:nrrw_rgn_nomap_nr = 1
+let g:nrrw_rgn_nomap_Nr = 1
+noremap <c-y> :NR<CR>
+
+
 " ===
 " === which key
 " ===

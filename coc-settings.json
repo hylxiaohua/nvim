@@ -75,9 +75,9 @@
 	"prettier.eslintIntegration": true,
 	"prettier.disableLanguages": [],
 	"prettier.useTabs": true,
-	"typescript.suggestionActions.enabled": true,
 	"prettier.formatterPriority": 1,
 	"typescript.format.enabled": true,
+	"typescript.suggestionActions.enabled": true,
 	"explorer.width": 38,
 	"explorer.quitOnOpen": true,
 	"explorer.sources": [
@@ -188,6 +188,7 @@
 	"javascript.suggest.names": true,
 	"javascript.suggestionActions.enabled": true,
 	"json.format.enable": true,
+  "prettier.printWidth": 100,
 	"todolist.autoUpload": true,
 	"todolist.promptForReminder":false,
 	"coc-actions.hideCursor": false,
