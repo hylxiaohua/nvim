@@ -96,6 +96,11 @@ set virtualedit=block
 " F4 换行开关
 nnoremap <F4> :set wrap! wrap?<CR>
 
+" press f10 to show hlgroup
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " ===
@@ -210,6 +215,7 @@ noremap <LEADER><CR> :nohlsearch<CR>
 " Open up lazygit
 noremap \g :term lazygit<CR>
 noremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
+nnoremap <c-n> :tabe<CR>:-tabmove<CR>:term lazynpm<CR>
 
 " Open up pudb
 noremap <c-d> :tab sp<CR>:term python3 -m pudb %<CR>
@@ -235,6 +241,8 @@ noremap <silent> L $
 "意思是gk/j可以在term中移动？
 "noremap <silent> gu gk
 "noremap <silent> ge gj
+
+source /home/hyl/.config/nvim/cursor.vim
 
 " ===
 " === Insert Mode Cursor Movement
@@ -340,9 +348,6 @@ autocmd BufEnter * silent! lcd %:p:h
 
 " Call figlet
 noremap tx :r !figlet
-
-noremap <LEADER>- :lN<CR>
-noremap <LEADER>= :lne<CR>
 
 " find and replace
 noremap \s :%s///g<left><left><left>
@@ -480,7 +485,7 @@ Plug 'junegunn/fzf.vim'
 "Plug 'junegunn/fzf'
 
 " 用途：ranger浮动窗口
-Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+Plug 'kevinhwang91/rnvimr'
 
 " 用途：更改project的根目录
 Plug 'airblade/vim-rooter'
@@ -571,6 +576,7 @@ Plug 'tpope/vim-fugitive'
 " next/prev format 备选
 " 可以更改优先级，同一个文件的不同部分执行不同的format等t
 Plug 'airblade/vim-gitgutter'
+Plug 'cohama/agit.vim'
 
 " ################## Tex ###################
 Plug 'lervag/vimtex'
@@ -827,11 +833,12 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'ctrlpvim/ctrlp.vim' , { 'for': ['cs', 'vim-plug'] } " omnisharp-vim dependency
 
 call plug#end()
+set re=0
+let g:snips_author = 'David'
 
 " experimental
 set lazyredraw
 "set regexpengine=1
-
 
 " ===
 " === Dress up my vim
@@ -869,11 +876,17 @@ let g:airline_powerline_fonts = 0
 " ==
 " == GitGutter
 " ==
-let g:gitgutter_signs = 0
+" let g:gitgutter_signs = 0
+let g:gitgutter_sign_allow_clobber = 0
 let g:gitgutter_map_keys = 0
 let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_preview_win_floating = 1
 "let g:gitgutter_use_location_list = 1
+let g:gitgutter_sign_added = '▎'
+let g:gitgutter_sign_modified = '░'
+let g:gitgutter_sign_removed = '▏'
+let g:gitgutter_sign_removed_first_line = '▔'
+let g:gitgutter_sign_modified_removed = '▒'
 autocmd BufWritePost * GitGutter
 nnoremap <LEADER>gf :GitGutterFold<CR>
 nnoremap <LEADER>gp :GitGutterPreviewHunk<CR>
@@ -901,7 +914,27 @@ nnoremap gb :Gblame<CR>
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 "let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter', 'coc-floaterm']
 "coc-clangd需要在Lsp的配置文件中去掉clangd,但自己编译的llvm7的clangd经常会断开，暂时未找到解决方案。
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-floaterm', 'coc-snippets', 'coc-todolist', 'coc-tasks', 'coc-actions', 'coc-diagnostic', 'coc-prettier']
+let g:coc_global_extensions = [
+			\ 'coc-python', 
+			\ 'coc-vimlsp', 
+			\ 'coc-html', 
+			\ 'coc-json', 
+			\ 'coc-tsserver', 
+			\ 'coc-yank', 
+			\ 'coc-gitignore', 
+			\ 'coc-vimlsp', 
+			\ 'coc-stylelint', 
+			\ 'coc-tslint', 
+			\ 'coc-lists', 
+			\ 'coc-explorer', 
+			\ 'coc-translator', 
+			\ 'coc-floaterm', 
+			\ 'coc-snippets', 
+			\ 'coc-todolist', 
+			\ 'coc-tasks', 
+			\ 'coc-actions', 
+			\ 'coc-diagnostic', 
+			\ 'coc-prettier']
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "nmap <silent> <TAB> <Plug>(coc-range-select)
 "xmap <silent> <TAB> <Plug>(coc-range-select)
@@ -972,9 +1005,23 @@ let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
+nmap <silent> <LEADER>- <Plug>(coc-diagnostic-prev)
+nmap <silent> <LEADER>= <Plug>(coc-diagnostic-next)
+
 "修复enter不能选中coc-snippet的问题
 "inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"  "效果同上
+
+function! Show_documentation()
+	call CocActionAsync('highlight')
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+nnoremap <LEADER>h :call Show_documentation()<CR>
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " ===
 " === MarkdownPreview
@@ -1019,11 +1066,11 @@ let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 " ===
 set rtp+=/usr/local/opt/fzf
 set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
-noremap <C-p> :Files<CR>
-noremap <C-f> :Ag<CR>
-noremap <C-h> :History<CR>
+noremap <silent> <C-p> :Files<CR>
+noremap <silent> <C-f> :Ag<CR>
+noremap <silent> <C-h> :History<CR>
 "noremap <C-t> :BTags<CR>
-noremap <C-l> :Lines<CR>
+noremap <silent> <C-l> :Lines<CR>
 "noremap <C-w> :Buffers<CR>
 "noremap ; :History:<CR>
 let g:fzf_preview_window = 'right:60%'
@@ -1049,6 +1096,8 @@ command! BD call fzf#run(fzf#wrap({
 \ }))
 
 noremap <c-d> :BD<CR>
+
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 
 " ===
 " === CTRLP (Dependency for omnisharp)
@@ -1499,7 +1548,17 @@ let g:vmt_fence_closing_text = '/TOC'
 " ===
 let g:rnvimr_ex_enable = 1
 let g:rnvimr_pick_enable = 1
-nnoremap <silent> R :RnvimrSync<CR>:RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
+let g:rnvimr_draw_border = 0
+" let g:rnvimr_bw_enable = 1
+highlight link RnvimrNormal CursorLine
+nnoremap <silent> R :RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
+let g:rnvimr_action = {
+            \ '<C-t>': 'NvimEdit tabedit',
+            \ '<C-x>': 'NvimEdit split',
+            \ '<C-v>': 'NvimEdit vsplit',
+            \ 'gw': 'JumpNvimCwd',
+            \ 'yw': 'EmitRangerCwd'
+            \ }
 let g:rnvimr_layout = { 'relative': 'editor',
             \ 'width': &columns,
             \ 'height': &lines,
@@ -1558,7 +1617,6 @@ let g:floatern_position = 'center'
 let g:nrrw_rgn_nomap_nr = 1
 let g:nrrw_rgn_nomap_Nr = 1
 noremap <c-y> :NR<CR>
-
 
 " ===
 " === which key
@@ -1624,6 +1682,12 @@ vnoremap <silent> <leader> :WhichKeyVisual ' '<CR>
 nnoremap <silent> <localleader> :WhichKey ','<CR>
 vnoremap <silent> <localleader> :WhichKeyVisual ','<CR>
 
+" ===
+" === Agit
+" ===
+nnoremap <LEADER>gl :Agit<CR>
+let g:agit_no_default_mappings = 1
+
 " ===================== End of Plugin Settings =====================
 
 
@@ -1631,7 +1695,6 @@ vnoremap <silent> <localleader> :WhichKeyVisual ','<CR>
 " === Necessary Commands to Execute
 " ===
 exec "nohlsearch"
-
 
 " Open the _machine_specific.vim file if it has just been created
 if has_machine_specific_file == 0
