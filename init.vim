@@ -341,8 +341,6 @@ noremap <localleader>tj :set splitright<CR>:vsplit<CR>:res +10<CR>:term<CR>
 " Press space twice to jump to the next '<++>' and edit it
 " noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 
-noremap <C-c> zz
-
 " Auto change directory to current dir
 autocmd BufEnter * silent! lcd %:p:h
 
@@ -397,8 +395,6 @@ endfunc
 
 call plug#begin('~/.config/nvim/plugged')
 
-" dark是一种语言，flutter是框架
-"Plug 'tiagofumo/dart-vim-flutter-layout'
 
 " 用途: 浮动窗口终端
 " FloaterNew/toggle/prev/next/
@@ -438,8 +434,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'junkblocker/git-time-lapse'
 Plug 'chrisbra/NrrwRgn'
 
-" ################### 美化 ######################
-
+" ################### line ######################
 " 用途：最底下的状态栏，支持coc vista等
 "Plug 'theniceboy/eleline.vim'
 Plug 'liuchengxu/eleline.vim'
@@ -449,10 +444,9 @@ Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '|'
 
 " ################### 颜色主题 ######################
-Plug 'liuchengxu/space-vim-theme'
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
 Plug 'ajmwagar/vim-deus'
-Plug 'arzg/vim-colors-xcode'
+"Plug 'arzg/vim-colors-xcode'
 
 " ################### 高亮 ######################
 
@@ -462,9 +456,6 @@ Plug 'jaxbot/semantic-highlight.vim'
 " 高亮
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
-"说是可以给不同的变量高亮成不同颜色，但试了没啥用。
-"Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
-
 " 用途：
 " 可以高亮当前光标下的变量
 " 可配置的地方如下：
@@ -473,6 +464,7 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " 3. 设置文件过滤功能
 " 4. 设置语言过滤功能(比如c的文件名和注释中的同名变量)
 Plug 'RRethy/vim-illuminate'
+Plug 'bpietravalle/vim-bolt'
 
 " ############## File navigation ##################
 
@@ -521,13 +513,7 @@ Plug 'liuchengxu/vista.vim'   "按 T 触发
 " 需要写一个vimsepector.json文件，类似于Lsp的那种文件
 " 插件基于DAP协议(Debug Adapter Protocol)，类似于LSP
 " 每一个gadget会有一个gadgets.json，和vimsepector.json类似
-Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python'}
-
-" REPL
-" ruby用的
-"Plug 'rhysd/reply.vim'
-
-" ##########  Error checking, handled by coc ##############
+"Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python'}
 
 " ############# Auto Complete ################
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -1151,7 +1137,7 @@ endfunc
 " ===
 " === tcomment_vim
 " ===
-nnoremap ci cl
+"nnoremap ci cl
 let g:tcomment_textobject_inlinecomment = ''
 nmap <LEADER>cn g>c
 vmap <LEADER>cn g>
