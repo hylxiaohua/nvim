@@ -395,7 +395,6 @@ endfunc
 
 call plug#begin('~/.config/nvim/plugged')
 
-
 " 用途: 浮动窗口终端
 " FloaterNew/toggle/prev/next/
 " msend--发送指定行到teminal
@@ -408,14 +407,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'voldikss/vim-floaterm'
 
 
-" 用途：
-" 可以一行拆多行，多行拆一行，对c/python而言，简直是鸡肋。
-"myfunction(arg1, arg2, arg3);
-"myfunction(arg1,
-				"arg2,
-				"arg3);
-"Plug 'AndrewRadev/splitjoin.vim'
-
 " 用途：一个颜色拾取器
 " <alt-r> <alt-v> <alt-w>可以分别rgb hsl rgba下选中一个颜色
 " 自动转换成对应的值
@@ -425,14 +416,7 @@ Plug 'voldikss/vim-floaterm'
 " 3. 指定外部的颜色拾取器
 "Plug 'KabbAmine/vCoolor.vim'
 
-
 Plug 'liuchengxu/vim-which-key'
-
-" 用途：异步执行任务
-Plug 'skywind3000/asynctasks.vim'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'junkblocker/git-time-lapse'
-Plug 'chrisbra/NrrwRgn'
 
 " ################### line ######################
 " 用途：最底下的状态栏，支持coc vista等
@@ -440,6 +424,7 @@ Plug 'chrisbra/NrrwRgn'
 Plug 'liuchengxu/eleline.vim'
 Plug 'bling/vim-bufferline'
 Plug 'Yggdroot/indentLine'
+Plug 'bpietravalle/vim-bolt'
 "let g:indentLine_setColors = 0
 let g:indentLine_char = '|'
 
@@ -464,7 +449,6 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " 3. 设置文件过滤功能
 " 4. 设置语言过滤功能(比如c的文件名和注释中的同名变量)
 Plug 'RRethy/vim-illuminate'
-Plug 'bpietravalle/vim-bolt'
 
 " ############## File navigation ##################
 
@@ -525,7 +509,6 @@ Plug 'wellle/tmux-complete.vim'
 " ############## Snippets #################
 "Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-"Plug 'theniceboy/vim-snippets'
 
 " ############# Undo Tree ##################
 " 用途：临时恢复文件，救命用的
@@ -537,6 +520,8 @@ Plug 'mbbill/undotree'
 Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
 Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 
+" 用途：命令行模式方便进行git操作
+" :Git push/commit
 Plug 'tpope/vim-fugitive'
 
 " 用途：高亮于文件改动的内容
@@ -562,25 +547,38 @@ Plug 'tpope/vim-fugitive'
 " next/prev format 备选
 " 可以更改优先级，同一个文件的不同部分执行不同的format等t
 Plug 'airblade/vim-gitgutter'
+
+" 用途：预览git commit提交记录
 Plug 'cohama/agit.vim'
+
+" 用途：类似与显示commit差异
+Plug 'junkblocker/git-time-lapse'
+
+" Formatter
+" 按\f触发，试了下c++下，完全是垃圾
+" 支持多种语言，每种语言用一种不同的format来执行，比如c++是clang
+" 可以自由选择，也可以自定义，设置过滤等。
+" :currentFormatter  当前的format
+" next/prev format 备选
+" 可以更改优先级，同一个文件的不同部分执行不同的format等
+Plug 'Chiel92/vim-autoformat'
 
 " ################## Tex ###################
 Plug 'lervag/vimtex'
 
-
 " ############### 语言相关 #####################
 Plug 'elzr/vim-json'
-Plug 'othree/html5.vim'
-Plug 'alvan/vim-closetag'
+" Plug 'othree/html5.vim'
+" Plug 'alvan/vim-closetag'
 " Plug 'hail2u/vim-css3-syntax' " , { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-"  Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
-"Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-"Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-"Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-"Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-""Plug 'jaxbot/browserlink.vim'
-"Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
-"Plug 'keith/swift.vim'
+" Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
+" Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+" Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+" Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+" Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+" Plug 'jaxbot/browserlink.vim'
+" Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
+" Plug 'keith/swift.vim'
 
 " ################ Python ################
 " 用途：折叠代码用的，只提供了折叠import，和注释的功能，
@@ -607,9 +605,6 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
 " 8. g:semshi#self_to_attribute  --是否高亮self
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
 
-"Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
-"Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
-
 " 用途: 快速选中段落/folding等功能
 " 快速选中段落：iP/aP
 " object motions：]] 每级缩进间移动
@@ -620,9 +615,8 @@ Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-p
 "	easymotion
 Plug 'tweekmonster/braceless.vim', { 'for' :['python', 'vim-plug'] }
 
-" #################### Flutter ######################
-"Plug 'dart-lang/dart-vim-plugin'
-"Plug 'thosakwe/vim-flutter'
+"Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
+"Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
 
 " ################# Markdown ##################
 "Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
@@ -666,11 +660,11 @@ Plug 'mg979/vim-visual-multi'
 "  */
 " <leader-cA> 在行尾添加注释
 " <leader-cl> 左端对齐  cb 两端对齐(/**/)
-Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
+"Plug 'scrooloose/nerdcommenter' 
 Plug 'tomtom/tcomment_vim' " in <space>cn to comment a line
 
 " 用途：true <-> false的转换
-Plug 'theniceboy/antovim' " gs to switch
+Plug 'theniceboy/antovim'  " 光标处 :Antovim
 
 " 用途：surround.vim
 " cs + xy  : x="" y=''
@@ -687,10 +681,12 @@ Plug 'gcmt/wildfire.vim'
 Plug 'junegunn/vim-after-object'
 
 " 用途：快速对齐
-Plug 'godlygeek/tabular' " ga or :Tabularize <regex> to align
+" ga or :Tabularize <regex> to align
+Plug 'godlygeek/tabular' 
 
 " 用途：锁定大小写的
 " Plug 'tpope/vim-capslock'	" Ctrl+L (insert) to toggle capslock
+"
 " 用途：快速移动
 " <leader><leader>h/l/w
 " <leader><leader>f
@@ -701,41 +697,45 @@ Plug 'easymotion/vim-easymotion'
 " 用途：对f/F/t/T的一个增强。
 " 首先，会高亮除当前单词出现的字母之外的首个字母。如果是第2次出现的，会用不同的颜色高亮
 " 然后就没用途了。
-"Plug 'unblevable/quick-scope' " quickscope 更高效的行内移动, f/F/t/T, 才触发
+" Plug 'unblevable/quick-scope' " quickscope 更高效的行内移动, f/F/t/T, 才触发
 
 " 用途：自动折叠
 " 还没摸索出怎么用, 这个真的不能生效
-Plug 'Konfekt/FastFold'
+" Plug 'Konfekt/FastFold'
 
 " 用途：去除行尾空格
 "Plug 'bronson/vim-trailing-whitespace'
+
 " 用途：显示寄存器的值
 " "触发
 Plug 'junegunn/vim-peekaboo'
 
 "Plug 'wellle/context.vim'
-"用途：一种快速替换工具
+
+" 用途：一种快速替换工具
 " s+motion：用默认剪切板里的替换motion
 " s+motion+motion(range motion)
 " 自定义text object
 " 替换确认
 Plug 'svermeulen/vim-subversive'
-" 快速写参数用的？
+
+" 用途：快速删除/修改参数
+" 目前发现的用法只有 daa 删除一个参数
 Plug 'theniceboy/argtextobj.vim'
+
 " f/t{char} 后直接按f/t，代替;
-"Plug 'rhysd/clever-f.vim'
+Plug 'rhysd/clever-f.vim'
 
-" Input Method Autoswitch
-"Plug 'rlue/vim-barbaric' " slowing down vim-multiple-cursors
+" 用途：一种分片的显示，整不明白
+Plug 'chrisbra/NrrwRgn'
 
-" Formatter
-" 按\f触发，试了下c++下，完全是垃圾
-" 支持多种语言，每种语言用一种不同的format来执行，比如c++是clang
-" 可以自由选择，也可以自定义，设置过滤等。
-" :currentFormatter  当前的format
-" next/prev format 备选
-" 可以更改优先级，同一个文件的不同部分执行不同的format等
-Plug 'Chiel92/vim-autoformat'
+" 用途：
+" 可以一行拆多行，多行拆一行，对c/python而言，简直是鸡肋。
+"myfunction(arg1, arg2, arg3);
+"myfunction(arg1,
+				"arg2,
+				"arg3);
+"Plug 'AndrewRadev/splitjoin.vim'
 
 " ############## For general writing ################
 " 用途：一种全体居中，适合阅读的一种模式，有点像word的两端对齐
@@ -753,7 +753,7 @@ Plug 'junegunn/limelight.vim'
 " 书签移动  show all bookmarks
 " move bookmarks
 " 保存书签至一个文件 或者相反
-Plug 'MattesGroeger/vim-bookmarks'
+" Plug 'MattesGroeger/vim-bookmarks'
 
 " ################## Find & Replace ####################
 " 用途：多个文件之间的替换和查找
@@ -778,6 +778,9 @@ Plug 'osyo-manga/vim-anzu'
 "Plug 'liuchengxu/vim-clap'
 "Plug 'jceb/vim-orgmode'
 "Plug 'mhinz/vim-startify'
+" 用途：异步执行任务
+Plug 'skywind3000/asynctasks.vim'
+Plug 'skywind3000/asyncrun.vim'
 
 " Vim Applications
 " 用途：一个日历加备忘录
