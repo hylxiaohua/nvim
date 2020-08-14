@@ -661,6 +661,8 @@ Plug 'mg979/vim-visual-multi'
 " <leader-cA> 在行尾添加注释
 " <leader-cl> 左端对齐  cb 两端对齐(/**/)
 "Plug 'scrooloose/nerdcommenter' 
+" <leader> cn/u 普通模式块注释
+" gc gc+motion gcc 普通模式/visual模式
 Plug 'tomtom/tcomment_vim' " in <space>cn to comment a line
 
 " 用途：true <-> false的转换
@@ -681,7 +683,7 @@ Plug 'gcmt/wildfire.vim'
 Plug 'junegunn/vim-after-object'
 
 " 用途：快速对齐
-" ga or :Tabularize <regex> to align
+"  会那种表达式，整不明白，直接写死对齐等号
 Plug 'godlygeek/tabular' 
 
 " 用途：锁定大小写的
@@ -901,7 +903,6 @@ nnoremap gb :Gblame<CR>
 " ===
 " fix the most annoying bug that coc has
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-"let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter', 'coc-floaterm']
 "coc-clangd需要在Lsp的配置文件中去掉clangd,但自己编译的llvm7的clangd经常会断开，暂时未找到解决方案。
 let g:coc_global_extensions = [
 			\ 'coc-python', 
@@ -962,12 +963,6 @@ nmap <leader>rn <Plug>(coc-rename) "只能替换一个单词
 nmap <localleader>ce :CocCommand explorer<CR>
 " coc-translator
 nmap <localleader>ct <Plug>(coc-translator-p)
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph 
-" 完全没啥用
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-" Remap for do codeAction of selected region
-xmap <leader>a  <Plug>(coc-codeaction-selected)
 function! s:cocActionsOpenFromSelected(type) abort
 nmap <leader>a  <Plug>(coc-codeaction-selected)
   execute 'CocCommand actions.open ' . a:type
@@ -1142,10 +1137,8 @@ endfunc
 " ===
 "nnoremap ci cl
 let g:tcomment_textobject_inlinecomment = ''
-nmap <LEADER>cn g>c
-vmap <LEADER>cn g>
-nmap <LEADER>cu g<c
-vmap <LEADER>cu g<
+nmap <LEADER>cn g>b
+nmap <LEADER>cu g<b
 
 " ===
 " === vim-visual-multi
@@ -1360,8 +1353,7 @@ let g:colorizer_syntax = 1
 " === tabular
 " ===
 " ===
-xmap ga <Plug>(EasyAlign)
-vmap ga :Tabularize /
+vmap ga :Tabularize /=/l1c1
 
 " ===
 " === vim-easymotion
