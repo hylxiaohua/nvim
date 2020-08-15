@@ -93,16 +93,7 @@ set colorcolumn=100
 set updatetime=1000
 set virtualedit=block
 
-" F4 换行开关
-nnoremap <F4> :set wrap! wrap?<CR>
-
-" press f10 to show hlgroup
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
 " ===
 " === Terminal Behaviors
 " ===
@@ -125,53 +116,6 @@ let g:terminal_color_11 = '#F4F99D'
 let g:terminal_color_12 = '#CAA9FA'
 let g:terminal_color_13 = '#FF92D0'
 let g:terminal_color_14 = '#9AEDFE'
-augroup TermHandling
-  autocmd!
-  " Turn off line numbers, listchars, auto enter insert mode and map esc to
-  " exit insert mode
-  autocmd TermOpen * setlocal listchars= nonumber norelativenumber
-    \ | startinsert
-  autocmd FileType fzf call LayoutTerm(0.6, 'horizontal')
-augroup END
-
-function! LayoutTerm(size, orientation) abort
-  let timeout = 16.0
-  let animation_total = 120.0
-  let timer = {
-    \ 'size': a:size,
-    \ 'step': 1,
-    \ 'steps': animation_total / timeout
-  \}
-
-  if a:orientation == 'horizontal'
-    resize 1
-    function! timer.f(timer)
-      execute 'resize ' . string(&lines * self.size * (self.step / self.steps))
-      let self.step += 1
-    endfunction
-  else
-    vertical resize 1
-    function! timer.f(timer)
-      execute 'vertical resize ' . string(&columns * self.size * (self.step / self.steps))
-      let self.step += 1
-    endfunction
-  endif
-  call timer_start(float2nr(timeout), timer.f, {'repeat': float2nr(timer.steps)})
-endfunction
-
-" Open autoclosing terminal, with optional size and orientation
-function! OpenTerm(cmd, ...) abort
-  let orientation = get(a:, 2, 'horizontal')
-  if orientation == 'horizontal'
-    new | wincmd J
-  else
-    vnew | wincmd L
-  endif
-  call LayoutTerm(get(a:, 1, 0.5), orientation)
-  call termopen(a:cmd, {'on_exit': {j,c,e -> execute('if c == 0 | close | endif')}})
-endfunction
-" }}}
-" vim:fdm=marker
 
 
 " ===
@@ -212,14 +156,14 @@ noremap <LEADER><CR> :nohlsearch<CR>
 "nnoremap <LEADER>tt :%s/    /\t/g
 "vnoremap <LEADER>tt :s/    /\t/g
 
+" Folding
+" noremap <silent> <LEADER>o za
+
 " Open up lazygit
-noremap \g :term lazygit<CR>
+noremap \g :Git
 noremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
 nnoremap <c-n> :tabe<CR>:-tabmove<CR>:term lazynpm<CR>
 
-" Open up pudb
-noremap <c-d> :tab sp<CR>:term python3 -m pudb %<CR>
-"noremap <f5> :tab sp<CR>:term python3 -m pudb %<CR>
 
 " U/E keys for 5 times u/e (faster navigation)
 noremap <silent> K 5k
@@ -350,6 +294,15 @@ noremap tx :r !figlet
 " find and replace
 noremap \s :%s///g<left><left><left>
 
+" set wrap
+nnoremap <F4> :set wrap! wrap?<CR>
+
+" press f10 to show hlgroup
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+
 " Compile function
 noremap rr :call CompileRunGcc()<CR>
 func! CompileRunGcc()
@@ -379,8 +332,6 @@ func! CompileRunGcc()
 	elseif &filetype == 'tex'
 		silent! exec "VimtexStop"
 		silent! exec "VimtexCompile"
-	elseif &filetype == 'dart'
-		CocCommand flutter.run
 	elseif &filetype == 'go'
 		set splitbelow
 		:sp
