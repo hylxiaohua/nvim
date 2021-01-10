@@ -528,6 +528,8 @@ Plug 'ctrlpvim/ctrlp.vim' , { 'for': ['cs', 'vim-plug'] } " omnisharp-vim depend
 
 " ############### 语言相关 #####################
 Plug 'elzr/vim-json'
+"Syntax highlighting for CJSON in Vim
+Plug 'neoclide/jsonc.vim'
 " Plug 'othree/html5.vim'
 " Plug 'alvan/vim-closetag'
 " Plug 'hail2u/vim-css3-syntax' " , { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
@@ -945,6 +947,7 @@ let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 let g:snips_author = 'xiaohua'
+autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 
 "修复enter不能选中coc-snippet的问题
 "inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
@@ -1029,6 +1032,7 @@ let g:Lf_CommandMap = {
 \   '<C-]>': ['<C-v>'],
 \   '<C-p>': ['<C-n>'],
 \}
+let g:Lf_UseVersionControlTool = 0
 
 
 " ===
