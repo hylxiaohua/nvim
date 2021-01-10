@@ -73,7 +73,8 @@
 		"css",
 		"json",
 		"python",
-		"vue"
+		"vue",
+		"c"
 	],
 	"yaml.format.enable": true,
 	"signature.target": "float",

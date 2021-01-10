@@ -470,7 +470,7 @@ Plug 'liuchengxu/vista.vim'   "按 T 触发
 
 " ############# Auto Complete ################
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': 'v0.0.78'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': 'v0.0.79'}
 " 用途：可以在vim中补全 邻近的tmux的pane中的内容
 " 没有快捷键，直接用
 " 配置：选择触发的方式
