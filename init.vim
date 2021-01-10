@@ -376,6 +376,8 @@ Plug 'liuchengxu/vim-which-key'
 " 用途：最底下的状态栏，支持coc vista等
 " Plug 'theniceboy/eleline.vim'
 Plug 'liuchengxu/eleline.vim'
+"A scrollbar for Vim statusline.
+Plug 'ojroques/vim-scrollstatus'
 Plug 'bling/vim-bufferline'
 Plug 'Yggdroot/indentLine'
 Plug 'bpietravalle/vim-bolt'
@@ -1153,6 +1155,7 @@ let g:vista#renderer#icons = {
 " endfunction
 " set statusline+=%{NearestMethodOrFunction()}
 " autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+set g:scrollstatus_size = 15
 
 
 " ===
