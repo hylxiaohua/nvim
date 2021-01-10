@@ -138,6 +138,7 @@ noremap S :w<CR>
 
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
+noremap <LEADER>rv :e .nvimrc<CR>
 
 " Open Startify
 "noremap <LEADER>st :Startify<CR>
@@ -861,7 +862,6 @@ nnoremap <LEADER>g+ :GitGutterNextHunk<CR>
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 "coc-clangd需要在Lsp的配置文件中去掉clangd,但自己编译的llvm7的clangd经常会断开，暂时未找到解决方案。
 let g:coc_global_extensions = [
-			\ 'coc-actions',
 			\ 'coc-diagnostic',
 			\ 'coc-explorer',
 			\ 'coc-gitignore',
@@ -875,7 +875,6 @@ let g:coc_global_extensions = [
 			\ 'coc-stylelint',
 			\ 'coc-syntax',
 			\ 'coc-tasks',
-			\ 'coc-todolist',
 			\ 'coc-translator',
 			\ 'coc-vimlsp',
 			\ 'coc-yank']
@@ -938,12 +937,12 @@ nmap <localleader>ct <Plug>(coc-translator-p)
 function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
 endfunction
-xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
 nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+nmap <leader>aw  <Plug>(coc-codeaction-selected)w
 " coctodolist
-nnoremap <leader>cn :CocCommand todolist.create<CR>
-nnoremap <leader>cl :CocList todolist<CR>
-nnoremap <leader>cu :CocCommand todolist.download<CR>:CocCommand todolist.upload<CR>
+" nnoremap <leader>cn :CocCommand todolist.create<CR>
+" nnoremap <leader>cl :CocList todolist<CR>
+" nnoremap <leader>cu :CocCommand todolist.download<CR>:CocCommand todolist.upload<CR>
 " coc-tasks
 noremap <silent> <leader>ts :CocList tasks<CR>
 
