@@ -166,11 +166,6 @@ noremap <LEADER><CR> :nohlsearch<CR>
 " Folding
 " noremap <silent> <LEADER>o za
 
-" Open up lazygit
-noremap \g :Git
-noremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
-nnoremap <c-n> :tabe<CR>:-tabmove<CR>:term lazynpm<CR>
-
 noremap <silent> \v v$h
 
 " U/E keys for 5 times u/e (faster navigation)
@@ -521,6 +516,7 @@ Plug 'airblade/vim-gitgutter'
 
 " 用途：预览git commit提交记录
 Plug 'cohama/agit.vim'
+Plug 'kdheepak/lazygit.nvim'
 
 " 用途：类似与显示commit差异
 Plug 'junkblocker/git-time-lapse'
@@ -714,6 +710,7 @@ Plug 'chrisbra/NrrwRgn'
 				"arg2,
 				"arg3);
 "Plug 'AndrewRadev/splitjoin.vim'
+Plug 'theniceboy/pair-maker.vim'
 
 " ############## For general writing ################
 " 用途：一种全体居中，适合阅读的一种模式，有点像word的两端对齐
@@ -1697,6 +1694,15 @@ let g:agit_no_default_mappings = 1
 "   },
 " }
 " EOF
+
+" ===
+" === lazygit.nvim
+" ===
+noremap <c-g> :LazyGit<CR>
+let g:lazygit_floating_window_winblend = 0 " transparency of floating window
+let g:lazygit_floating_window_scaling_factor = 1.0 " scaling factor for floating window
+let g:lazygit_floating_window_corner_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
+let g:lazygit_use_neovim_remote = 1 " for neovim-remote support
 
 " ===================== End of Plugin Settings =====================
 
