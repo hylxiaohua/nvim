@@ -699,9 +699,6 @@ Plug 'theniceboy/argtextobj.vim'
 " f/t{char} 后直接按f/t，代替;
 Plug 'rhysd/clever-f.vim'
 
-" 用途：一种分片的显示，整不明白
-Plug 'chrisbra/NrrwRgn'
-
 
 " 用途：
 " 可以一行拆多行，多行拆一行，对c/python而言，简直是鸡肋。
@@ -711,6 +708,7 @@ Plug 'chrisbra/NrrwRgn'
 				"arg3);
 "Plug 'AndrewRadev/splitjoin.vim'
 Plug 'theniceboy/pair-maker.vim'
+Plug 'theniceboy/vim-move'
 
 " ############## For general writing ################
 " 用途：一种全体居中，适合阅读的一种模式，有点像word的两端对齐
@@ -1570,14 +1568,10 @@ let g:tcomment_textobject_inlinecomment = ''
 nmap <LEADER>cn g>b
 nmap <LEADER>cu g<b
 
-
 " ===
-" === NrrwRgn
+" === vim-move
 " ===
-let g:nrrw_rgn_nomap_nr = 1
-let g:nrrw_rgn_nomap_Nr = 1
-noremap <c-y> :NR<CR>
-
+let g:move_key_modifier = 'C'
 
 " ===
 " === any-jump
