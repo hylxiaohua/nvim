@@ -303,9 +303,11 @@ noremap \s :%s///g<left><left><left>
 nnoremap <F4> :set wrap! wrap?<CR>
 
 " press f10 to show hlgroup
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+function! SynGroup()
+	let l:s = synID(line('.'), col('.'), 1)
+	echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
+map <F10> :call SynGroup()<CR>
 
 " Compile function
 noremap rr :call CompileRunGcc()<CR>
@@ -386,6 +388,7 @@ Plug 'bling/vim-bufferline'
 " Treesitter 貌似需要最新的版本 太麻烦
 " https://github.com/nvim-treesitter/nvim-treesitter/issues/700
 " Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'nvim-treesitter/playground
 Plug 'Yggdroot/indentLine'
 Plug 'bpietravalle/vim-bolt'
 " let g:indentLine_setColors = 0
@@ -394,7 +397,8 @@ let g:indentLine_char = '|'
 " ################### 颜色主题 ######################
 " Plug 'morhetz/gruvbox'
 Plug 'ajmwagar/vim-deus'
-"Plug 'arzg/vim-colors-xcode'
+" Plug 'theniceboy/nvim-deus'
+" Plug 'arzg/vim-colors-xcode'
 
 " ################### 高亮 ######################
 
@@ -519,13 +523,8 @@ Plug 'cohama/agit.vim'
 Plug 'junkblocker/git-time-lapse'
 
 " ########## AutoFormat ##################
-" 按\f触发，试了下c++下，完全是垃圾
-" 支持多种语言，每种语言用一种不同的format来执行，比如c++是clang
-" 可以自由选择，也可以自定义，设置过滤等。
-" :currentFormatter  当前的format
-" next/prev format 备选
-" 可以更改优先级，同一个文件的不同部分执行不同的format等
-Plug 'Chiel92/vim-autoformat'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
 
 " ################## Tex ###################
 Plug 'lervag/vimtex'
@@ -1280,10 +1279,19 @@ let g:go_doc_keywordprg_enabled = 0
 " ===
 " === AutoFormat
 " ===
-nnoremap \f :Autoformat<CR>
-let g:formatdef_custom_js = '"js-beautify -t"'
-let g:formatters_javascript = ['custom_js']
-au BufWrite *.js :Autoformat
+augroup autoformat_settings
+	" autocmd FileType bzl AutoFormatBuffer buildifier
+	" autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+	" autocmd FileType dart AutoFormatBuffer dartfmt
+	" autocmd FileType go AutoFormatBuffer gofmt
+	" autocmd FileType gn AutoFormatBuffer gn
+	" autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+	autocmd FileType java AutoFormatBuffer google-java-format
+	" autocmd FileType python AutoFormatBuffer yapf
+	" Alternative: autocmd FileType python AutoFormatBuffer autopep8
+	" autocmd FileType rust AutoFormatBuffer rustfmt
+	" autocmd FileType vue AutoFormatBuffer prettier
+augroup END
 
 
 " ===
@@ -1681,7 +1689,7 @@ let g:agit_no_default_mappings = 1
 " ===
 " lua <<EOF
 " require'nvim-treesitter.configs'.setup {
-"   ensure_installed = {typescript},     -- one of "all", "language", or a list of languages
+"   ensure_installed = {"typescript", "dart", "java"},     -- one of "all", "language", or a list of languages
 "   highlight = {
 "     enable = true,              -- false will disable the whole extension
 "     disable = { "c", "rust" },  -- list of language that will be disabled
