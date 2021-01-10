@@ -848,32 +848,24 @@ nnoremap <LEADER>g+ :GitGutterNextHunk<CR>
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 "coc-clangd需要在Lsp的配置文件中去掉clangd,但自己编译的llvm7的clangd经常会断开，暂时未找到解决方案。
 let g:coc_global_extensions = [
-  \ 'coc-actions',
-  \ 'coc-diagnostic',
-  \ 'coc-explorer',
-  \ 'coc-gitignore',
-  \ 'coc-html',
-  \ 'coc-json',
-  \ 'coc-lists',
-  \ 'coc-prettier',
-  \ 'coc-pyright',
-  \ 'coc-python',
-  \ 'coc-snippets',
-  \ 'coc-stylelint',
-  \ 'coc-syntax',
-  \ 'coc-tasks',
-  \ 'coc-todolist',
-  \ 'coc-translator',
-  \ 'coc-vimlsp',
-  \ 'coc-yank']
-"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-"nmap <silent> <TAB> <Plug>(coc-range-select)
-"xmap <silent> <TAB> <Plug>(coc-range-select)
-" use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]	=~ '\s'
-endfunction
+			\ 'coc-actions',
+			\ 'coc-diagnostic',
+			\ 'coc-explorer',
+			\ 'coc-gitignore',
+			\ 'coc-html',
+			\ 'coc-json',
+			\ 'coc-lists',
+			\ 'coc-prettier',
+			\ 'coc-pyright',
+			\ 'coc-python',
+			\ 'coc-snippets',
+			\ 'coc-stylelint',
+			\ 'coc-syntax',
+			\ 'coc-tasks',
+			\ 'coc-todolist',
+			\ 'coc-translator',
+			\ 'coc-vimlsp',
+			\ 'coc-yank']
 inoremap <silent><expr> <TAB>
 	\ pumvisible() ? "\<C-n>" :
 	\ <SID>check_back_space() ? "\<Tab>" :
@@ -890,24 +882,32 @@ endfunction
 " inoremap <silent><expr> <c-space> coc#refresh()
 " inoremap <silent><expr> <c-o> coc#refresh()
 function! Show_documentation()
-	call CocActionAsync('highlight')
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
+			call CocActionAsync('highlight')
+			if (index(['vim','help'], &filetype) >= 0)
+							execute 'h '.expand('<cword>')
+			else
+							call CocAction('doHover')
+			endif
 endfunction
 nnoremap <LEADER>h :call Show_documentation()<CR>
 " autocmd CursorHold * silent call CocActionAsync('highlight')
 
 
+nnoremap <silent><nowait> <LEADER>d :CocList diagnostics<cr>
+nmap <silent> <LEADER>- <Plug>(coc-diagnostic-prev)
+nmap <silent> <LEADER>= <Plug>(coc-diagnostic-next)
+
 " Open up coc-commands
 nnoremap <localleader>cc :CocCommand<CR>
 " Text Objects   没反应，一点都没
-"xmap kf <Plug>(coc-funcobj-i)
-"xmap af <Plug>(coc-funcobj-a)
-"omap kf <Plug>(coc-funcobj-i)
-"omap af <Plug>(coc-funcobj-a)
+" xmap kf <Plug>(coc-funcobj-i)
+" xmap af <Plug>(coc-funcobj-a)
+" omap kf <Plug>(coc-funcobj-i)
+" omap af <Plug>(coc-funcobj-a)
+" xmap kc <Plug>(coc-classobj-i)
+" omap kc <Plug>(coc-classobj-i)
+" xmap ac <Plug>(coc-classobj-a)
+" omap ac <Plug>(coc-classobj-a)
 " Useful commands
 nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
 nmap <silent> gd <Plug>(coc-definition)
@@ -945,9 +945,6 @@ let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 let g:snips_author = 'xiaohua'
-
-nmap <silent> <LEADER>- <Plug>(coc-diagnostic-prev)
-nmap <silent> <LEADER>= <Plug>(coc-diagnostic-next)
 
 "修复enter不能选中coc-snippet的问题
 "inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
