@@ -709,6 +709,8 @@ Plug 'rhysd/clever-f.vim'
 "Plug 'AndrewRadev/splitjoin.vim'
 Plug 'theniceboy/pair-maker.vim'
 Plug 'theniceboy/vim-move'
+" 绝对行号和相对行号互转
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " ############## For general writing ################
 " 用途：一种全体居中，适合阅读的一种模式，有点像word的两端对齐
