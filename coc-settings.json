@@ -64,18 +64,8 @@
 	"list.previousKeymap": "<C-u>",
 	"snippets.ultisnips.directories": [
 		"$HOME/.config/nvim/UltiSnips/",
-		"$HOME/.config/nvim/plugged/vim-snippets/UltiSnips/"
-	],
-	"coc.preferences.formatOnSaveFiletypes": [
-		"javascript",
-		"typescript",
-		"html",
-		"css",
-		"json",
-		"python",
-		"vue",
-		"c"
-	],
+		"$HOME/.config/nvim/plugged/vim-snippets/UltiSnips/"],
+	"coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "html", "css", "json", "python", "vue", "svelte", "c"],
 	"yaml.format.enable": true,
 	"signature.target": "float",
 	"yank.enableCompletion" : false,
@@ -98,6 +88,7 @@
 	"explorer.icon.enableNerdfont": true,
 	"explorer.file.column.git.showIgnored": true,
 	"explorer.keyMappingMode": "none",
+	"explorer.buffer.showHiddenBuffers": false,
 	"explorer.keyMappings": {
 		"i": "unmap", 
 
@@ -111,8 +102,8 @@
 
 		"h": "collapse",
 		"l": ["expandable?", "expand", "open"],
-   "J": ["toggleSelection", "nodeNext"],
-   "K": ["toggleSelection", "nodePrev"],
+		"J": ["toggleSelection", "nodeNext"],
+		 "K": ["toggleSelection", "nodePrev"],
 		"gl": "expandRecursive",
 		"gh": "collapseRecursive",
 		"o": "expandOrCollapse",
@@ -125,7 +116,6 @@
 	 "t": "open:tab",
 	 "<bs>": "gotoParent",
 	 "gp": "preview:labeling",
-
 		"yp": "copyFilepath",
 		"yn": "copyFilename",
 		"yy": "copyFile",
@@ -180,19 +170,27 @@
 	"git.signOffset": 2,
 	"flutter.openDevLogSplitCommand": "botright 12split",
 	"tslint.autoFixOnSave": true,
+	"flutter.outlineWidth": 40,
+	"flutter.outlineIconPadding": 0,
+	"flutter.UIPath": true,
+	"flutter.openDevLogSplitCommand": "botright 12split",
+	"flutter.lsp.initialization.onlyAnalyzeProjectsWithOpenFiles": false,
+	"tslint.autoFixOnSave": false,
 	"python.autoComplete.addBrackets": true,
 	"python.jediEnabled": false,
 	"python.formatting.provider": "autopep8",
 	"python.formatting.yapfArgs": [
-        "{SPACES_AROUND_POWER_OPERATOR: True, SPACES_BEFORE_COMMENT: 1}"
-    ],
+		"--style",
+		"{SPACES_AROUND_POWER_OPERATOR: True, SPACES_BEFORE_COMMENT: 1}"
+	],
 	"html.format.enable": true,
 	"javascript.referencesCodeLens.enable": true,
 	"javascript.showUnused": true,
 	"javascript.suggest.names": true,
 	"javascript.suggestionActions.enabled": true,
 	"json.format.enable": true,
-  "prettier.printWidth": 100,
+	"eslint.autoFixOnSave": false,
+	"prettier.printWidth": 100,
 	"prettier.eslintIntegration": true,
 	"prettier.disableLanguages": [],
 	"prettier.formatterPriority": 1,
@@ -200,21 +198,19 @@
 	"prettier.trailingComma": "all",
 	"prettier.singleQuote": false,
 	"todolist.autoUpload": true,
-	"todolist.promptForReminder":false,
+	"todolist.promptForReminder": false,
 	"coc-actions.hideCursor": false,
-	"coc-actions.showActionKind": true,	
+	"coc-actions.showActionKind": true,
 	"diagnostic-languageserver.filetypes": {
 		"vim": "vint",
 		"email": "languagetool",
-		"markdown": [ "write-good", "markdownlint" ],
+		"markdown": ["write-good", "markdownlint"],
 		"sh": "shellcheck",
 		"elixir": ["mix_credo", "mix_credo_compile"],
 		"eelixir": ["mix_credo", "mix_credo_compile"],
-		"php": ["phpstan", "psalm"],
-		"dart": "dartfmt"
+		"php": ["phpstan", "psalm"]
 	},
 	"diagnostic-languageserver.formatFiletypes": {
-		"dart": "dartfmt",
 		"elixir": "mix_format",
 		"eelixir": "mix_format"
 	},
@@ -222,6 +218,13 @@
 		"lua": {
 			"command": "lua-lsp",
 			"filetypes": ["lua"]
+		},
+		"swift": {
+			"command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
+			"args": [],
+			"filetypes": ["swift"],
+			"initializationOptions": {},
+			"settings": {}
 		},
 		"golang": {
 			"command": "gopls",
