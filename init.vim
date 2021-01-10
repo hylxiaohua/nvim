@@ -350,6 +350,9 @@ endfunc
 
 call plug#begin('~/.config/nvim/plugged')
 
+" FZTerm is my attempt at a fuzzy finder plugin, using a floating terminal and basically nothing else
+Plug 'LoricAndre/fzterm.nvim'
+
 " 用途: 浮动窗口终端
 " FloaterNew/toggle/prev/next/
 " msend--发送指定行到teminal
@@ -380,6 +383,9 @@ Plug 'liuchengxu/eleline.vim'
 "A scrollbar for Vim statusline.
 Plug 'ojroques/vim-scrollstatus'
 Plug 'bling/vim-bufferline'
+" Treesitter 貌似需要最新的版本 太麻烦
+" https://github.com/nvim-treesitter/nvim-treesitter/issues/700
+" Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'Yggdroot/indentLine'
 Plug 'bpietravalle/vim-bolt'
 " let g:indentLine_setColors = 0
@@ -458,6 +464,7 @@ Plug 'liuchengxu/vista.vim'   "按 T 触发
 
 " ############# Auto Complete ################
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': 'v0.0.78'}
 " 用途：可以在vim中补全 邻近的tmux的pane中的内容
 " 没有快捷键，直接用
 " 配置：选择触发的方式
@@ -756,8 +763,6 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'itchyny/calendar.vim'
 
 " Other visual enhancement
-" 给一些Needtree之类的加一些图标
-Plug 'ryanoasis/vim-devicons'
 " 用途：让不同层次的括号显示不同颜色
 Plug 'luochen1990/rainbow'
 " 用途：在tabline上显示 tabs/buffer/arglist
@@ -769,6 +774,8 @@ Plug 'luochen1990/rainbow'
 " 配置：
 " enable-mapping: 开启默认的快捷键
 Plug 'mg979/vim-xtabline'
+" 给一些Needtree之类的加一些图标
+Plug 'ryanoasis/vim-devicons'
 " 用途：vim自带终端的一种增强
 Plug 'wincent/terminus'
 
@@ -895,7 +902,10 @@ function! Show_documentation()
 			endif
 endfunction
 nnoremap <LEADER>h :call Show_documentation()<CR>
-" autocmd CursorHold * silent call CocActionAsync('highlight')
+" set runtimepath^=~/.config/nvim/coc-extensions/coc-flutter-tools/
+" let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']
+" let $NVIM_COC_LOG_LEVEL = 'debug'
+" let $NVIM_COC_LOG_FILE = '/Users/david/Desktop/log.txt'
 
 
 nnoremap <silent><nowait> <LEADER>d :CocList diagnostics<cr>
@@ -987,8 +997,8 @@ let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 set rtp+=/usr/local/opt/fzf
 set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 set rtp+=/home/david/.linuxbrew/opt/fzf
-noremap <silent> <C-p> :Files<CR>
 noremap <silent> <C-p> :Leaderf file<CR>
+" noremap <silent> <C-p> :Files<CR>
 noremap <silent> <C-f> :Ag<CR>
 noremap <silent> <C-h> :History<CR>
 "noremap <C-t> :BTags<CR>
@@ -1665,6 +1675,19 @@ vnoremap <silent> <localleader> :WhichKeyVisual ','<CR>
 " ===
 nnoremap <LEADER>gl :Agit<CR>
 let g:agit_no_default_mappings = 1
+
+" ===
+" === nvim-treesitter
+" ===
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   ensure_installed = {typescript},     -- one of "all", "language", or a list of languages
+"   highlight = {
+"     enable = true,              -- false will disable the whole extension
+"     disable = { "c", "rust" },  -- list of language that will be disabled
+"   },
+" }
+" EOF
 
 " ===================== End of Plugin Settings =====================
 
