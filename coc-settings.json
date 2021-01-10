@@ -68,10 +68,12 @@
 	],
 	"coc.preferences.formatOnSaveFiletypes": [
 		"javascript",
+		"typescript",
 		"html",
 		"css",
+		"json",
 		"python",
-		"dart"
+		"vue"
 	],
 	"yaml.format.enable": true,
 	"signature.target": "float",

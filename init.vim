@@ -168,6 +168,7 @@ noremap \g :Git
 noremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
 nnoremap <c-n> :tabe<CR>:-tabmove<CR>:term lazynpm<CR>
 
+noremap <silent> \v v$h
 
 " U/E keys for 5 times u/e (faster navigation)
 noremap <silent> K 5k
@@ -1037,7 +1038,7 @@ let g:Lf_CommandMap = {
 let g:Lf_UseVersionControlTool = 0
 let g:Lf_IgnoreCurrentBufferName = 1
 let g:Lf_WildIgnore = {
-        \ 'dir': ['.git'],
+        \ 'dir': ['.git', 'vendor', 'node_modules'],
         \ 'file': ['__vim_project_root']
         \}
 let g:Lf_UseMemoryCache = 0
@@ -1162,7 +1163,7 @@ let g:vista#renderer#icons = {
 " endfunction
 " set statusline+=%{NearestMethodOrFunction()}
 " autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-set g:scrollstatus_size = 15
+let g:scrollstatus_size = 15
 
 
 " ===
