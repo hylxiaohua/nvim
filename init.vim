@@ -670,6 +670,9 @@ Plug 'dkarter/bullets.vim'
 Plug 'jiangmiao/auto-pairs'
 
 " 选中同一个单词，多光标同时修改 <c-k>触发,暂时还不知道怎么取消，回到上一个
+" 可以进入可视模式选中一块区域后，按<c-n>
+" 按n/N可以跳过当前匹配项
+" q取消当前匹配项，跳到下一个
 " 用途：visual block模式的一个增强，很给力
 " <c-down> <c-up> 可以解决，visual block没有列对齐的短板
 " shift+arrow 字符可视模式
@@ -692,13 +695,15 @@ Plug 'tomtom/tcomment_vim' " in <space>cn to comment a line
 Plug 'theniceboy/antovim'  " 光标处 :Antovim
 
 " 用途：surround.vim
+" 选中之后 S+" 
+" { 带空格  } 不带空格
 " cs + xy  : x="" y=''
 " ds + x : remove x
 " ys + iw + x
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
 
 " 用途：快速选中
-" <Enter>  选中当前光标下的被''之类包裹的text <BS>可撤销
+" <Enter>  选中当前光标下的被''之类包裹的text <BS>可撤销 可以连续按
 Plug 'gcmt/wildfire.vim'
 
 " 用途：快速选中 = 后面的内容
